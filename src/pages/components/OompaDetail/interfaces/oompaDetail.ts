@@ -1,6 +1,6 @@
-import { Country, Favorite, Gender } from '../../OompaList/interfaces/oompaList';
+import { Country, IFavorite, Gender } from '../../OompaList/interfaces/oompaList';
 
-export interface OompaDetail {
+export interface IOompaDetail {
   last_name: string;
   description: string;
   image: string;
@@ -10,7 +10,7 @@ export interface OompaDetail {
   first_name: string;
   country: Country;
   age: number;
-  favorite: Favorite;
+  favorite: IFavorite;
   gender: Gender;
   email: string;
 }

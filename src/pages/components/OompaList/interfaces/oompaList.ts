@@ -1,13 +1,13 @@
-export interface OompaListPage {
+export interface IOompaListPage {
   current: number;
   total: number;
-  results: OompaListItem[];
+  results: IOompaListItem[];
 }
 
-export interface OompaListItem {
+export interface IOompaListItem {
   first_name: string;
   last_name: string;
-  favorite: Favorite;
+  favorite: IFavorite;
   gender: Gender;
   image: string;
   profession: string;
@@ -20,7 +20,7 @@ export interface OompaListItem {
 
 export type Country = 'Loompalandia';
 
-export interface Favorite {
+export interface IFavorite {
   color: Color;
   food: Food;
   random_string: string;

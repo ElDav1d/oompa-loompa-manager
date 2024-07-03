@@ -1,5 +1,5 @@
 const OompaDetail = () => {
-  return <h2>Detail</h2>;
+  return <h1 className='text-2xl'>Detail</h1>;
 };
 
 export default OompaDetail;

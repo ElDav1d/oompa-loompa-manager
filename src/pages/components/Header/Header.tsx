@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+export interface IHeaderProps {
+  children?: React.ReactNode;
+}
+
+const Header = ({ children }: IHeaderProps) => {
   return (
     <header>
-      <h1 className='text-3xl font-bold'>OOMPA-LOOMPA MANAGER</h1>
       <nav>
         <ul className='flex justify-between'>
           <li>
@@ -18,6 +21,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      {children}
     </header>
   );
 };

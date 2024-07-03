@@ -1,7 +1,11 @@
+import { Detail } from './pages/Detail';
+import { Home } from './pages/Home';
+
 function App() {
   return (
     <>
-      <h1 className='text-3xl font-bold underline'>OOMPA-LOOMPA MANAGER</h1>
+      <Home />
+      <Detail />
     </>
   );
 }

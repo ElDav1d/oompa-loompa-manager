@@ -5,7 +5,7 @@ const Detail = () => {
     <>
       <Header />
       <main>
-        <h1>Detail</h1>
+        <h2 className='text-2xl'>Detail</h2>
       </main>
     </>
   );

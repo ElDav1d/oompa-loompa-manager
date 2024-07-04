@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IOompaListPage } from './interfaces/oompaList';
-import { mockOompaListPage } from './mocks/mockOompaListPage';
 
-const initialState: IOompaListPage = mockOompaListPage;
+const initialState = {
+  current: 1,
+  total: 0,
+  results: [],
+};
 
 export const oompaListSlice = createSlice({
   name: 'oompaList',

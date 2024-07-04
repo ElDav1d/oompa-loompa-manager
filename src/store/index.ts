@@ -1,11 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import oompaListReducer from '../pages/components/OompaList/oompaListSlice';
-import { IOompaListPage } from '../pages/components/OompaList/interfaces/oompaList';
-
-export interface IAppState {
-  oompaList: IOompaListPage;
-}
+import oompaListReducer from '../components/OompaList/oompaListSlice';
 
 export const store = configureStore({
   reducer: { oompaList: oompaListReducer },
 });
+
+export type RootState = ReturnType<typeof store.getState>;

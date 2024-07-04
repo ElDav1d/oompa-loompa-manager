@@ -32,3 +32,8 @@ export type Color = 'red' | 'blue';
 export type Food = 'Chocolat' | 'cocoa nuts';
 
 export type Gender = 'F' | 'M';
+
+export enum HumanizedGender {
+  'F' = 'Female',
+  'M' = 'Male',
+}

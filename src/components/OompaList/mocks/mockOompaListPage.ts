@@ -1,6 +1,6 @@
-import { OompaListPage } from '../interfaces/oompaList';
+import { IOompaListPage } from '../interfaces/oompaList';
 
-const mockOompaListPage: OompaListPage = {
+const mockOompaListPage: IOompaListPage = {
   current: 1,
   total: 20,
   results: [
@@ -481,4 +481,5 @@ const mockOompaListPage: OompaListPage = {
     },
   ],
 };
+
 export { mockOompaListPage };

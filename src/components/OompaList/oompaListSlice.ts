@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IOompaListPage as IOompaListPage } from './interfaces/oompaList';
+import { IOompaListPage } from './interfaces/oompaList';
 import { mockOompaListPage } from './mocks/mockOompaListPage';
 
 const initialState: IOompaListPage = mockOompaListPage;

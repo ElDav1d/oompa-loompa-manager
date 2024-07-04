@@ -1,5 +1,5 @@
-import { Header } from '../components/Header';
-import { OompaList } from '../components/OompaList';
+import { Header } from '../../components/Header';
+import { OompaList } from '../../components/OompaList';
 
 const Home = () => {
   return (

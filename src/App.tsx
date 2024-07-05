@@ -13,7 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/detail' element={<Detail />} />
+            <Route path='/:oompaId' element={<Detail />} />
           </Routes>
         </BrowserRouter>
         <ReactQueryDevtools />

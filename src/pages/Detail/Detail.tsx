@@ -1,11 +1,12 @@
-import { Header } from '../../components/Header';
-import { OompaDetail } from '../../components/OompaDetail';
+import { OompaDetail } from '../../features/detail';
+import { NavigationMain } from '../../features/navigation';
+import { Header } from '../../ui/Header';
 
 const Detail = () => {
   return (
     <>
       <Header>
-        <h2 className='text-2xl'>Detail</h2>
+        <NavigationMain />
       </Header>
       <main>
         <OompaDetail />

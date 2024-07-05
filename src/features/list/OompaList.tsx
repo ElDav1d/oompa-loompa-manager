@@ -1,9 +1,10 @@
 import { useInView } from 'react-intersection-observer';
-import { Loader } from '../Loader';
+import { Loader } from '../../ui/Loader';
 import { useEffect } from 'react';
 import { useOompaList } from './hooks';
 import { useOompaListActions } from './hooks';
 import { useAppSelector } from '../../hooks';
+import OompaListItem from './OompaListItem';
 
 const OompaList = () => {
   const oompas = useAppSelector((state) => state.oompaList.oompas);
@@ -42,12 +43,14 @@ const OompaList = () => {
       {oompas?.length > 0 && (
         <ul>
           {oompas.map(({ id, image, first_name, gender, profession }) => (
-            <li key={id}>
-              <img src={image} alt={first_name} title={first_name} />
-              <h3>{first_name}</h3>
-              <p>{gender}</p>
-              <p>{profession}</p>
-            </li>
+            <OompaListItem
+              key={id}
+              id={id}
+              image={image}
+              first_name={first_name}
+              gender={gender}
+              profession={profession}
+            />
           ))}
         </ul>
       )}

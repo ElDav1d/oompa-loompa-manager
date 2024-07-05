@@ -1,4 +1,4 @@
-import { Country, IFavorite, Gender } from '../../OompaList/interfaces/oompaList';
+import { Country, IFavorite, Gender } from '../../../features/list/interfaces/oompaList';
 
 export interface IOompaDetail {
   last_name: string;

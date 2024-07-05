@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import oompaListReducer from '../components/OompaList/oompaListSlice';
-import oompaDetailReducer from '../components/OompaDetail/oompaDetailSlice';
+import oompaListReducer from '../features/list/oompaListSlice';
+import oompaDetailReducer from '../features/detail/oompaDetailSlice';
 
 export const store = configureStore({
   reducer: { oompaList: oompaListReducer, oompaDetail: oompaDetailReducer },

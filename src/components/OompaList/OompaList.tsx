@@ -21,7 +21,7 @@ const OompaList = () => {
   } = useOompaList();
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 1,
   });
 
   useEffect(() => {

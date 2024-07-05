@@ -18,6 +18,11 @@ export interface IOompaListItem {
   id: number;
 }
 
+export interface IOompaList {
+  fetchingDate: string;
+  oompas: IOompaListItem[];
+}
+
 export type Country = 'Loompalandia';
 
 export interface IFavorite {

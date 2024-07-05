@@ -1,13 +1,24 @@
 import { useInView } from 'react-intersection-observer';
 import { Loader } from '../Loader';
-import { HumanizedGender } from './interfaces/oompaList';
 import { useEffect } from 'react';
-
-import { useOompas } from './hooks';
+import { useOompaList } from './hooks';
+import { useOompaListActions } from './hooks';
+import { useAppSelector } from '../../hooks';
 
 const OompaList = () => {
-  const { isLoading, isError, oompas, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useOompas();
+  const oompas = useAppSelector((state) => state.oompaList.oompas);
+
+  const { setOompaList } = useOompaListActions();
+
+  const {
+    isLoading,
+    isError,
+    newFetchingDate,
+    fetchedOompas,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useOompaList();
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -15,10 +26,14 @@ const OompaList = () => {
 
   useEffect(() => {
     if (inView && !isFetchingNextPage) {
-      console.log('yay');
       fetchNextPage();
+
+      setOompaList({
+        fetchingDate: new Date(newFetchingDate).toISOString(),
+        oompas: fetchedOompas,
+      });
     }
-  }, [inView]);
+  }, [inView, hasNextPage]);
 
   return (
     <section>
@@ -36,9 +51,6 @@ const OompaList = () => {
           ))}
         </ul>
       )}
-
-      <h2>is loading {`${isLoading}`}</h2>
-      <h2>has next page {`${hasNextPage}`}</h2>
 
       {(isLoading || hasNextPage) && (
         <div ref={ref}>

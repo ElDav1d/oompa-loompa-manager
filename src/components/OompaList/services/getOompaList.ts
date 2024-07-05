@@ -1,4 +1,4 @@
-const getOompas = async ({ pageParam = 1 }) => {
+const getOompaList = async ({ pageParam = 1 }) => {
   const url = `https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas?page=${pageParam}`;
 
   try {
@@ -16,4 +16,4 @@ const getOompas = async ({ pageParam = 1 }) => {
   }
 };
 
-export default getOompas;
+export default getOompaList;

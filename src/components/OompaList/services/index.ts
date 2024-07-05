@@ -1,1 +1,1 @@
-export { default as getOompas } from './getOompas';
+export { default as getOompaList } from './getOompaList';

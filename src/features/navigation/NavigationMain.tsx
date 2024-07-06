@@ -8,11 +8,6 @@ const NavigationMain = () => (
           Home
         </Link>
       </li>
-      <li>
-        <Link className='underline' to='/detail'>
-          Detail
-        </Link>
-      </li>
     </ul>
   </nav>
 );

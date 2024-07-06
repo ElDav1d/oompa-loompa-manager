@@ -12,7 +12,7 @@ const useOompaList = () => {
       staleTime: Infinity,
     });
 
-  const newFetchingDate = new Date();
+  const newFetchingDate = new Date().toISOString();
 
   const fetchedOompas = data?.pages?.flatMap((page) => page?.data.results) || [];
 

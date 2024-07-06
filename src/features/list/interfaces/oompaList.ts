@@ -4,6 +4,12 @@ export interface IOompaListPage {
   results: IOompaListItem[];
 }
 
+export interface IOompaList {
+  fetchingDate: string;
+  oompas: IOompaListItem[];
+  itemStamp: IOompaListItemStamp;
+}
+
 export interface IOompaListItem {
   first_name: string;
   last_name: string;
@@ -18,12 +24,12 @@ export interface IOompaListItem {
   id: number;
 }
 
-export interface IOompaList {
+export interface IOompaListItemStamp {
+  first_name: string;
   fetchingDate: string;
-  oompas: IOompaListItem[];
 }
 
-export type Country = 'Loompalandia';
+export type Country = 'Loompalandia' | '';
 
 export interface IFavorite {
   color: Color;
@@ -32,13 +38,14 @@ export interface IFavorite {
   song: string;
 }
 
-export type Color = 'red' | 'blue';
+export type Color = 'red' | 'blue' | '';
 
-export type Food = 'Chocolat' | 'cocoa nuts';
+export type Food = 'Chocolat' | 'cocoa nuts' | '';
 
-export type Gender = 'F' | 'M';
+export type Gender = 'F' | 'M' | '';
 
 export enum HumanizedGender {
   'F' = 'Female',
   'M' = 'Male',
+  '' = 'N/A',
 }

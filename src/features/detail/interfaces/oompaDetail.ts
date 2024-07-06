@@ -1,16 +1,6 @@
-import { Country, IFavorite, Gender } from '../../../features/list/interfaces/oompaList';
+import { IOompaListItem } from '../../../features/list/interfaces/oompaList';
 
-export interface IOompaDetail {
-  last_name: string;
+export type IOompaDetail = Omit<IOompaListItem, 'id' | 'first_name'> & {
   description: string;
-  image: string;
-  profession: string;
   quota: string;
-  height: number;
-  first_name: string;
-  country: Country;
-  age: number;
-  favorite: IFavorite;
-  gender: Gender;
-  email: string;
-}
+};

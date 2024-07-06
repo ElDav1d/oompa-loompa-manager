@@ -7,7 +7,8 @@ import { useAppSelector } from '../../hooks';
 import OompaListItem from './OompaListItem';
 
 const OompaList = () => {
-  const oompas = useAppSelector((state) => state.oompaList.oompas);
+  const oompaList = useAppSelector((state) => state.oompaList);
+  const { oompas } = oompaList;
 
   const { setOompaList } = useOompaListActions();
 
@@ -30,7 +31,8 @@ const OompaList = () => {
       fetchNextPage();
 
       setOompaList({
-        fetchingDate: new Date(newFetchingDate).toISOString(),
+        ...oompaList,
+        fetchingDate: newFetchingDate,
         oompas: fetchedOompas,
       });
     }
@@ -38,7 +40,7 @@ const OompaList = () => {
 
   return (
     <section>
-      {isError && <p>There was an error fetching the oompas</p>}
+      {isError && <p>There was an error getting the oompas</p>}
 
       {oompas?.length > 0 && (
         <ul>

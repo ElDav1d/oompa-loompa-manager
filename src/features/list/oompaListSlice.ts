@@ -4,6 +4,10 @@ import { IOompaList } from './interfaces/oompaList';
 const initialState: IOompaList = {
   fetchingDate: '',
   oompas: [],
+  itemStamp: {
+    first_name: '',
+    fetchingDate: '',
+  },
 };
 
 export const oompaListSlice = createSlice({
@@ -16,8 +20,11 @@ export const oompaListSlice = createSlice({
       state.fetchingDate = action.payload.fetchingDate;
       state.oompas = action.payload.oompas;
     },
+    setNewOompaItemStamp(state, action: PayloadAction<IOompaList>) {
+      state.itemStamp = action.payload.itemStamp;
+    },
   },
 });
 
 export default oompaListSlice.reducer;
-export const { setNewOompaList } = oompaListSlice.actions;
+export const { setNewOompaList, setNewOompaItemStamp } = oompaListSlice.actions;

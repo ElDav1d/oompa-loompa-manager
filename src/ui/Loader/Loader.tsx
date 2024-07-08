@@ -1,4 +1,5 @@
 import { PulseLoader as PulseLoader } from 'react-spinners';
+import { COLOR_OOMPA_BLUE } from '../../utils/constants';
 
 export interface ILoaderProps {
   /**
@@ -10,7 +11,7 @@ export interface ILoaderProps {
 
 const Loader = ({ loadingLabel }: ILoaderProps) => (
   <PulseLoader
-    color={'#25B7B6'}
+    color={COLOR_OOMPA_BLUE}
     className='mx-auto my-8'
     role='alert'
     aria-label={loadingLabel}

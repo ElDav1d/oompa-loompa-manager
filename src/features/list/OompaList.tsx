@@ -5,6 +5,7 @@ import { useOompaList } from './hooks';
 import { useOompaListActions } from './hooks';
 import { useAppSelector } from '../../hooks';
 import OompaListItem from './OompaListItem';
+import { LITERAL_LIST_ERROR_MESSAGE, LITERAL_LIST_LOADING } from '../../utils/constants';
 
 const OompaList = () => {
   const oompaList = useAppSelector((state) => state.oompaList);
@@ -40,7 +41,7 @@ const OompaList = () => {
 
   return (
     <section>
-      {isError && <p>There was an error getting the oompas</p>}
+      {isError && <p>{LITERAL_LIST_ERROR_MESSAGE}</p>}
 
       {oompas?.length > 0 && (
         <ul>
@@ -59,7 +60,7 @@ const OompaList = () => {
 
       {(isLoading || hasNextPage) && (
         <div ref={ref}>
-          <Loader loadingLabel={'loading oompas'} />
+          <Loader loadingLabel={LITERAL_LIST_LOADING} />
         </div>
       )}
     </section>

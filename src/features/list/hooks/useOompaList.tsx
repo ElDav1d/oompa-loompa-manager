@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getOompaList } from '../services';
+import { QUERY_KEY_LIST } from '../../../utils/constants';
 
 const useOompaList = () => {
   const { isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['oompas'],
+      queryKey: [QUERY_KEY_LIST],
       queryFn: ({ pageParam }: { pageParam: number | undefined }) => getOompaList({ pageParam }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       initialPageParam: undefined,

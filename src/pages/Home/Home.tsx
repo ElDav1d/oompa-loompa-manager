@@ -1,14 +1,15 @@
 import { Header } from '../../ui/Header';
 import { OompaList } from '../../features/list';
 import { NavigationMain } from '../../features/navigation';
+import { LITERAL_LIST_HEADING, LITERAL_LIST_SUBHEADING } from '../../utils/constants';
 
 const Home = () => {
   return (
     <>
       <Header>
         <NavigationMain />
-        <h1 className='text-center text-2xl'>Find your Oompa Loompa</h1>
-        <h2 className='text-center text-xl'>There are more than 100</h2>
+        <h1 className='text-center text-2xl'>{LITERAL_LIST_HEADING}</h1>
+        <h2 className='text-center text-xl'>{LITERAL_LIST_SUBHEADING}</h2>
       </Header>
       <main>
         <section>

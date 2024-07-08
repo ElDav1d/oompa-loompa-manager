@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Loader } from '../../ui/Loader';
 import { useAppSelector } from '../../hooks';
 import { useOompaDetail, useOompaDetailActions } from './hooks';
+import { LITERAL_DETAIL_ERROR_MESSAGE, LITERAL_DETAIL_LOADING } from '../../utils/constants';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
@@ -23,9 +24,9 @@ const OompaDetail = () => {
 
   return (
     <>
-      {isLoading && <Loader loadingLabel={`loading ${first_name}`} />}
+      {isLoading && <Loader loadingLabel={`${LITERAL_DETAIL_LOADING} ${first_name}`} />}
 
-      {isError && <p>{`There was an error getting ${first_name}`}</p>}
+      {isError && <p>{`${LITERAL_DETAIL_ERROR_MESSAGE} ${first_name}`}</p>}
 
       {fetchedOompaDetail && (
         <article className='flex'>

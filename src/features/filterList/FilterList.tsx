@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import { LITERAL_FILTER_LIST_LABEL, LITERAL_FILTER_LIST_PLACEHOLDER } from '../../utils/constants';
+import { useFilterListActions } from './hooks';
 
 const Search = () => {
-  const [searcInput, setSearcInput] = useState('');
+  const { setFilterList } = useFilterListActions();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearcInput(e.target.value);
+    setFilterList({ filterString: e.target.value });
   };
-
-  console.log(searcInput);
 
   return (
     <input

@@ -27,7 +27,6 @@ export const oompaDetailSlice = createSlice({
     setNewOompaDetail(state, action: PayloadAction<IOompaDetail>) {
       // as long as redux toolkit is being used, immer is being used
       // so state is being protected from mutations
-      console.log('action.payload', action.payload);
       Object.assign(state, action.payload);
     },
   },

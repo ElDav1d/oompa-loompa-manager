@@ -29,6 +29,42 @@ test('should filter if the filter string only contains whitespaces', () => {
   expect(result.current).toEqual(mockList);
 });
 
+test('should filter with a string preceeded by several whitespaces', () => {
+  //ARRANGE
+  const items = mockList;
+  const filterString = '  dev';
+  const filterProperties = ['profession'];
+
+  //ACT
+  const { result } = renderHook(() => useFilterList({ items, filterString, filterProperties }));
+
+  //ASSERT
+  expect(result.current).toEqual([
+    { first_name: 'John', last_name: 'Doe', profession: 'Developer' },
+    { first_name: 'Jane', last_name: 'Doe', profession: 'Developer' },
+    { first_name: 'John', last_name: 'Smith', profession: 'Developer' },
+    { first_name: 'Jane', last_name: 'Smith', profession: 'Developer' },
+  ]);
+});
+
+test('should filter with a string followed by several whitespaces', () => {
+  //ARRANGE
+  const items = mockList;
+  const filterString = 'dev  ';
+  const filterProperties = ['profession'];
+
+  //ACT
+  const { result } = renderHook(() => useFilterList({ items, filterString, filterProperties }));
+
+  //ASSERT
+  expect(result.current).toEqual([
+    { first_name: 'John', last_name: 'Doe', profession: 'Developer' },
+    { first_name: 'Jane', last_name: 'Doe', profession: 'Developer' },
+    { first_name: 'John', last_name: 'Smith', profession: 'Developer' },
+    { first_name: 'Jane', last_name: 'Smith', profession: 'Developer' },
+  ]);
+});
+
 test('should filter with one incomplete word and one property', () => {
   //ARRANGE
   const items = mockList;

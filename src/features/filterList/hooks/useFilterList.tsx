@@ -12,13 +12,13 @@ const useFilterList = <T extends Record<string, any>>({
   filterProperties,
 }: IUseFilterListProps<T>): T[] => {
   const filteredItems: T[] = useMemo(() => {
-    const isFilterStringEmpty = !filterString.trim();
+    const cleanString = filterString.trim();
 
-    if (isFilterStringEmpty) return items;
+    if (!cleanString) return items;
 
     return items.filter((item) =>
       filterProperties.some((property) =>
-        item[property].toLowerCase().includes(filterString.toLowerCase()),
+        item[property].toLowerCase().includes(cleanString.toLowerCase()),
       ),
     );
   }, [items, filterString, filterProperties]);

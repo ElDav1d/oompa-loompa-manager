@@ -1,5 +1,7 @@
 const BASE_URL = 'https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas';
 
+const STORED_STATE = '__oompas__state__';
+
 const COLOR_OOMPA_BLUE = '#25B7B6';
 
 const LITERAL_LIST_LOADING = 'Loading Ooompa Loompa List';
@@ -23,6 +25,7 @@ const QUERY_KEY_DETAIL = 'oompaDetail';
 
 export {
   BASE_URL,
+  STORED_STATE,
   COLOR_OOMPA_BLUE,
   LITERAL_LIST_LOADING,
   LITERAL_LIST_HEADING,

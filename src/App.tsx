@@ -4,7 +4,16 @@ import { Home } from './pages/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // de-activated for the purpose of the exercise
+      // 24 hours cache can be activated from here
+      staleTime: 0,
+      retry: false,
+    },
+  },
+});
 
 function App() {
   return (

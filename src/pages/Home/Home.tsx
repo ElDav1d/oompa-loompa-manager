@@ -14,9 +14,7 @@ const Home = () => {
         <h2 className='text-center text-xl'>{LITERAL_LIST_SUBHEADING}</h2>
       </Header>
       <main>
-        <section>
-          <OompaList />
-        </section>
+        <OompaList />
       </main>
     </>
   );

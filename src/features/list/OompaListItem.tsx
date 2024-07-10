@@ -35,7 +35,12 @@ const OompaListItem = ({
   return (
     <li className='bg-slate-500 mb-2'>
       <Link to={`/${id}`} onClick={handleClick}>
-        <img src={image} alt={first_name} title={first_name} width={200} />
+        <img
+          src={image}
+          alt={first_name}
+          title={first_name}
+          className='object-cover sm:h-27vh md:h-35vh'
+        />
         <h3>{first_name}</h3>
         <p>{gender && HumanizedGender[gender]}</p>
         <p>{profession}</p>

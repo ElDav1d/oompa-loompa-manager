@@ -2,7 +2,6 @@ import { useInView } from 'react-intersection-observer';
 import { Loader } from '../../ui/Loader';
 import { useEffect } from 'react';
 import { useOompaList } from './hooks';
-import { useOompaListActions } from './hooks';
 import { useAppSelector } from '../../hooks';
 import OompaListItem from './OompaListItem';
 import {
@@ -12,10 +11,10 @@ import {
 } from '../../utils/constants';
 import { IOompaListItem } from './interfaces/oompaList';
 import { useFilterList } from '../filterList/hooks';
+import { Container } from '../../ui/Container';
 
 const OompaList = () => {
   const filterString = useAppSelector((state) => state.filterList.filterString);
-  const { setOompaList } = useOompaListActions();
 
   const { isLoading, isError, fetchedOompas, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useOompaList();
@@ -43,7 +42,7 @@ const OompaList = () => {
     !isError && !isLoading && !isFetchingNextPage && filteredOompas?.length === 0;
 
   return (
-    <section>
+    <Container element={'section'}>
       {isError && <p>{LITERAL_LIST_ERROR_MESSAGE}</p>}
 
       {!isLoading && isFetchingNextPage && hasEmptyList && (
@@ -70,7 +69,7 @@ const OompaList = () => {
           <Loader loadingLabel={LITERAL_LIST_LOADING} />
         </div>
       )}
-    </section>
+    </Container>
   );
 };
 

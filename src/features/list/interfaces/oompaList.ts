@@ -5,9 +5,15 @@ export interface IOompaListPage {
 }
 
 export interface IOompaList {
-  feching_date: string;
+  current_page: number | undefined;
   oompas: IOompaListItem[];
 }
+
+export interface IOompaListStamp {
+  fetching_date: string;
+}
+
+export interface IOompaListWithStamp extends IOompaList, IOompaListStamp {}
 
 export interface IOompaListItem {
   first_name: string;
@@ -34,7 +40,7 @@ export interface IItemStampUpdate {
 
 export interface IUpdatedItemStamp extends INewItemStamp, IItemStampUpdate {}
 
-export interface IOompaListWithItemStamp extends IOompaList {
+export interface IOompaListWithItemStamp extends IOompaListWithStamp {
   item_stamp: IUpdatedItemStamp;
 }
 

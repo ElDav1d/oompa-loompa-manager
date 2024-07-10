@@ -14,28 +14,18 @@ import { IOompaListItem } from './interfaces/oompaList';
 import { useFilterList } from '../filterList/hooks';
 
 const OompaList = () => {
-  const oompaList = useAppSelector((state) => state.oompaList);
   const filterString = useAppSelector((state) => state.filterList.filterString);
-  const { oompas } = oompaList;
-
   const { setOompaList } = useOompaListActions();
 
-  const {
-    isLoading,
-    isError,
-    newFetchingDate,
-    fetchedOompas,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useOompaList();
+  const { isLoading, isError, fetchedOompas, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useOompaList();
 
   const { ref, inView } = useInView({
     threshold: 1,
   });
 
   const filteredOompas: IOompaListItem[] = useFilterList({
-    items: oompas,
+    items: fetchedOompas,
     filterString,
     filterProperties: ['first_name', 'last_name', 'profession'],
   });
@@ -46,12 +36,6 @@ const OompaList = () => {
       (filteredOompas.length <= 1 && !isFetchingNextPage && hasNextPage)
     ) {
       fetchNextPage();
-
-      setOompaList({
-        ...oompaList,
-        feching_date: newFetchingDate,
-        oompas: fetchedOompas,
-      });
     }
   }, [inView, hasNextPage, isFetchingNextPage, filteredOompas.length]);
 
@@ -62,19 +46,18 @@ const OompaList = () => {
     <section>
       {isError && <p>{LITERAL_LIST_ERROR_MESSAGE}</p>}
 
-      {hasEmptyList && <h3>{LITERAL_FILTER_LIST_EMPTY_RESULTS}</h3>}
+      {!isLoading && isFetchingNextPage && hasEmptyList && (
+        <h3>{LITERAL_FILTER_LIST_EMPTY_RESULTS}</h3>
+      )}
 
       {filteredOompas?.length > 0 && (
         <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-          {filteredOompas.map(({ id, image, first_name, last_name, gender, profession }) => (
+          {filteredOompas.map(({ id, image, first_name, gender, profession }) => (
             <OompaListItem
               key={id}
               id={id.toString()}
               image={image}
               first_name={first_name}
-              // TODO
-              // to be removed
-              last_name={last_name}
               gender={gender}
               profession={profession}
             />
@@ -82,7 +65,7 @@ const OompaList = () => {
         </ul>
       )}
 
-      {(isLoading || hasNextPage) && (
+      {(isLoading || isFetchingNextPage || hasNextPage) && (
         <div ref={ref}>
           <Loader loadingLabel={LITERAL_LIST_LOADING} />
         </div>

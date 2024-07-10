@@ -20,7 +20,11 @@ const useOompaDetail = (oompaId: string | undefined) => {
     const now = new Date().getTime();
     const lastFetchDate = new Date(lastFetch).getTime();
 
-    return now - lastFetchDate > cacheTime;
+    if (!lastFetch) {
+      return true;
+    } else {
+      return now - lastFetchDate > cacheTime;
+    }
   };
 
   const shouldFetch =

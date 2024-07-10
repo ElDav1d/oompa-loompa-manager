@@ -5,6 +5,7 @@ import { QUERY_KEY_DETAIL } from '../../../utils/constants';
 import { useOompaDetailActions } from '../hooks';
 import { useOompaListActions } from '../../list/hooks';
 import { useCallback, useEffect } from 'react';
+import { isDataExpired } from '../../../utils';
 
 const useOompaDetail = (oompaId: string | undefined) => {
   const { setOompaDetail } = useOompaDetailActions();
@@ -15,17 +16,6 @@ const useOompaDetail = (oompaId: string | undefined) => {
     oompaDetail: persistedOompaDetail,
     oompaList: { item_stamp },
   } = persistedState && JSON.parse(persistedState);
-
-  const isDataExpired = (lastFetch: string, cacheTime: number) => {
-    const now = new Date().getTime();
-    const lastFetchDate = new Date(lastFetch).getTime();
-
-    if (!lastFetch) {
-      return true;
-    } else {
-      return now - lastFetchDate > cacheTime;
-    }
-  };
 
   const shouldFetch =
     item_stamp.id !== oompaId || isDataExpired(item_stamp.fetching_date, CACHE_TIME);

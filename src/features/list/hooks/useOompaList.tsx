@@ -4,6 +4,7 @@ import { CACHE_TIME, QUERY_KEY_LIST, STORED_STATE } from '../../../utils/constan
 import useOompaListActions from './useOompaListActions';
 import { useCallback, useEffect } from 'react';
 import { IOompaList } from '../interfaces/oompaList';
+import { isDataExpired } from '../../../utils';
 
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
@@ -11,17 +12,6 @@ const useOompaList = () => {
   const { oompaList: persistedOompaList } = persistedState
     ? JSON.parse(persistedState)
     : { oompaList: null };
-
-  const isDataExpired = (lastFetch: string, cacheTime: number) => {
-    const now = new Date().getTime();
-    const lastFetchDate = new Date(lastFetch).getTime();
-
-    if (!lastFetch) {
-      return true;
-    } else {
-      return now - lastFetchDate > cacheTime;
-    }
-  };
 
   const shouldFetch =
     persistedOompaList && isDataExpired(persistedOompaList.fetching_date, CACHE_TIME);
@@ -37,6 +27,7 @@ const useOompaList = () => {
       return undefined;
     }
   };
+
   const { isLoading, isError, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: [QUERY_KEY_LIST],

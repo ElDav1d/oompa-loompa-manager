@@ -2,6 +2,8 @@ const BASE_URL = 'https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptil
 
 const STORED_STATE = '__oompas__state__';
 
+const CACHE_TIME = 24 * 60 * 60 * 1000; //equals to 24 hours
+
 const COLOR_OOMPA_BLUE = '#25B7B6';
 
 const LITERAL_LIST_LOADING = 'Loading Ooompa Loompa List';
@@ -26,6 +28,7 @@ const QUERY_KEY_DETAIL = 'oompaDetail';
 export {
   BASE_URL,
   STORED_STATE,
+  CACHE_TIME,
   COLOR_OOMPA_BLUE,
   LITERAL_LIST_LOADING,
   LITERAL_LIST_HEADING,

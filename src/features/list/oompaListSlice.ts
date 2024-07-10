@@ -1,12 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IOompaList } from './interfaces/oompaList';
+import {
+  IItemStampUpdate,
+  INewItemStamp,
+  IOompaList,
+  IOompaListWithItemStamp,
+} from './interfaces/oompaList';
 
-const initialState: IOompaList = {
-  fetchingDate: '',
+const initialState: IOompaListWithItemStamp = {
+  feching_date: '',
   oompas: [],
-  itemStamp: {
+  item_stamp: {
     first_name: '',
-    fetchingDate: '',
+    id: '',
+    fetching_date: '',
   },
 };
 
@@ -17,14 +23,19 @@ export const oompaListSlice = createSlice({
     setNewOompaList(state, action: PayloadAction<IOompaList>) {
       // as long as redux toolkit is being used, immer is being used
       // so state is being protected from mutations
-      state.fetchingDate = action.payload.fetchingDate;
+      state.feching_date = action.payload.feching_date;
       state.oompas = action.payload.oompas;
     },
-    setNewOompaItemStamp(state, action: PayloadAction<IOompaList>) {
-      state.itemStamp = action.payload.itemStamp;
+    setNewOompaItemStamp(state, action: PayloadAction<INewItemStamp>) {
+      state.item_stamp.first_name = action.payload.first_name;
+    },
+    updateNewOompaItemStamp(state, action: PayloadAction<IItemStampUpdate>) {
+      state.item_stamp.id = action.payload.id;
+      state.item_stamp.fetching_date = action.payload.fetching_date;
     },
   },
 });
 
 export default oompaListSlice.reducer;
-export const { setNewOompaList, setNewOompaItemStamp } = oompaListSlice.actions;
+export const { setNewOompaList, setNewOompaItemStamp, updateNewOompaItemStamp } =
+  oompaListSlice.actions;

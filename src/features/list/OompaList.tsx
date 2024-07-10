@@ -49,7 +49,7 @@ const OompaList = () => {
 
       setOompaList({
         ...oompaList,
-        fetchingDate: newFetchingDate,
+        feching_date: newFetchingDate,
         oompas: fetchedOompas,
       });
     }
@@ -65,13 +65,15 @@ const OompaList = () => {
       {hasEmptyList && <h3>{LITERAL_FILTER_LIST_EMPTY_RESULTS}</h3>}
 
       {filteredOompas?.length > 0 && (
-        <ul className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
           {filteredOompas.map(({ id, image, first_name, last_name, gender, profession }) => (
             <OompaListItem
               key={id}
-              id={id}
+              id={id.toString()}
               image={image}
               first_name={first_name}
+              // TODO
+              // to be removed
               last_name={last_name}
               gender={gender}
               profession={profession}

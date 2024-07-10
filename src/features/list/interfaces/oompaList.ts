@@ -5,9 +5,8 @@ export interface IOompaListPage {
 }
 
 export interface IOompaList {
-  fetchingDate: string;
+  feching_date: string;
   oompas: IOompaListItem[];
-  itemStamp: IOompaListItemStamp;
 }
 
 export interface IOompaListItem {
@@ -24,9 +23,19 @@ export interface IOompaListItem {
   id: number;
 }
 
-export interface IOompaListItemStamp {
+export interface INewItemStamp {
   first_name: string;
-  fetchingDate: string;
+}
+
+export interface IItemStampUpdate {
+  fetching_date: string;
+  id: string;
+}
+
+export interface IUpdatedItemStamp extends INewItemStamp, IItemStampUpdate {}
+
+export interface IOompaListWithItemStamp extends IOompaList {
+  item_stamp: IUpdatedItemStamp;
 }
 
 export type Country = 'Loompalandia' | '';

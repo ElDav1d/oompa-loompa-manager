@@ -22,7 +22,7 @@ const LITERAL_FILTER_LIST_IMG_TITLE = 'Search';
 const LITERAL_LIST_ERROR_MESSAGE = 'Ther was an error getting the Ooompa Loompa List';
 const LITERAL_LIST_HEADING = 'Find your Oompa Loompa';
 const LITERAL_LIST_LOADING = 'Loading Ooompa Loompa List';
-const LITERAL_LIST_SUBHEADING = 'There are more than 100';
+const LITERAL_LIST_SUBHEADING = 'There are more than 100k';
 
 const LITERAL_NAVIGATION_MAIN_FAKE_HEADING = "Oompa Loompa's Crew";
 const LITERAL_NAVIGATION_MAIN_IMG_ALT = 'Link to home page';

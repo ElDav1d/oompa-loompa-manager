@@ -9,7 +9,7 @@ import {
 } from '../../utils/constants';
 
 const NavigationMain = () => (
-  <div className='bg-secondary mb-4'>
+  <div className='bg-secondary mb-4 md:mb-6'>
     <Container
       element='nav'
       className='py-2 flex justify-between items-center gap-6 sm:justify-start'

@@ -25,7 +25,7 @@ const FilterInput = () => {
   });
 
   return (
-    <div className='w-full p-2 mb-24 flex justify-between items-center border border-secondary rounded-lg sm:w-auto'>
+    <div className='w-full p-2 flex justify-between items-center border border-secondary rounded-lg sm:w-auto'>
       <input
         className='w-full'
         type='text'

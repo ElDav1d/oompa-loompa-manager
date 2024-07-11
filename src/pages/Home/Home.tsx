@@ -10,11 +10,15 @@ const Home = () => {
     <>
       <Header>
         <NavigationMain />
-        <Container element={'div'} className='flex justify-end'>
+        <Container className='flex justify-end mb-4 md:mb-8'>
           <FilterInput />
         </Container>
-        <h1 className='text-center text-2xl'>{LITERAL_LIST_HEADING}</h1>
-        <h2 className='text-center text-xl'>{LITERAL_LIST_SUBHEADING}</h2>
+        <Container className='text-center mb-4 sm:mb-8 md:mb-16'>
+          <h1 className='text-2xl sm:text-4xl sm:mb-1 md:text-5xl'>{LITERAL_LIST_HEADING}</h1>
+          <h2 className='text-xl sm:text-2xl text-gray-500 md:text-4xl'>
+            {LITERAL_LIST_SUBHEADING}
+          </h2>
+        </Container>
       </Header>
       <main>
         <OompaList />

@@ -1,7 +1,7 @@
-import { BASE_URL } from '../../../utils/constants';
+import { URL_BASE } from '../../../utils/constants';
 
 const getOompaList = async ({ pageParam = 1 }) => {
-  const url = `${BASE_URL}?page=${pageParam}`;
+  const url = `${URL_BASE}?page=${pageParam}`;
 
   try {
     const response = await fetch(url);

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Gender, HumanizedGender } from './interfaces/oompaList';
 import { useOompaListActions } from './hooks';
+import { PATH_BASE } from '../../utils/constants';
 
 export interface IOompaListItemProps {
   id: string;
@@ -34,7 +35,7 @@ const OompaListItem = ({
 
   return (
     <li className='bg-slate-500 mb-2'>
-      <Link to={`/${id}`} onClick={handleClick}>
+      <Link to={`${PATH_BASE}/${id}`} onClick={handleClick}>
         <img
           src={image}
           alt={first_name}

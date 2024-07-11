@@ -1,7 +1,7 @@
-import { BASE_URL } from '../../../utils/constants';
+import { URL_BASE } from '../../../utils/constants';
 
 const getOompaDetail = async (oompaId: string | undefined) => {
-  const url = `${BASE_URL}/${oompaId}`;
+  const url = `${URL_BASE}/${oompaId}`;
 
   try {
     const response = await fetch(url);

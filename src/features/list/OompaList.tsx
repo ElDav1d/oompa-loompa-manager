@@ -20,7 +20,7 @@ const OompaList = () => {
     useOompaList();
 
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.1,
   });
 
   const filteredOompas: IOompaListItem[] = useFilterList({

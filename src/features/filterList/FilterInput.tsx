@@ -34,7 +34,7 @@ const FilterInput = () => {
         onChange={handleChange}
       />
       <img
-        className='w-4 ml-2 border-secondary border-l-2'
+        className='w-4 ml-2'
         src={RESOURCE_URL_FILTER_LIST_ICON}
         title={LITERAL_FILTER_LIST_IMG_ALT}
         alt={LITERAL_FILTER_LIST_IMG_TITLE}

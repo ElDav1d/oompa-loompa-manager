@@ -34,18 +34,26 @@ const OompaListItem = ({
   };
 
   return (
-    <li className='bg-slate-500 mb-2'>
-      <Link to={`${PATH_BASE}/${id}`} onClick={handleClick}>
-        <img
-          src={image}
-          alt={first_name}
-          title={first_name}
-          className='object-cover sm:h-27vh md:h-35vh'
-        />
-        <h3>{first_name}</h3>
-        <p>{gender && HumanizedGender[gender]}</p>
-        <p>{profession}</p>
+    <li className='mb-8'>
+      <img
+        src={image}
+        alt={first_name}
+        title={first_name}
+        className='mb-4 object-cover sm:h-27vh md:h-35vh'
+      />
+      <Link
+        to={`${PATH_BASE}/${id}`}
+        onClick={handleClick}
+        className='inline-block hover:text-primary'
+      >
+        <h3 className='text-xl'>
+          <b>{first_name}</b>
+        </h3>
       </Link>
+      <p>{gender && HumanizedGender[gender]}</p>
+      <p>
+        <i>{profession}</i>
+      </p>
     </li>
   );
 };

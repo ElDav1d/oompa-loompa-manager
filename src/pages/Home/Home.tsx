@@ -10,6 +10,8 @@ const Home = () => {
     <>
       <Header>
         <NavigationMain />
+      </Header>
+      <main>
         <Container className='flex justify-end mb-4 md:mb-8'>
           <FilterInput />
         </Container>
@@ -19,8 +21,6 @@ const Home = () => {
             {LITERAL_LIST_SUBHEADING}
           </h2>
         </Container>
-      </Header>
-      <main>
         <OompaList />
       </main>
     </>

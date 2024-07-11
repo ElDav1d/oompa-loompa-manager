@@ -5,6 +5,7 @@ import { LITERAL_DETAIL_ERROR_MESSAGE, LITERAL_DETAIL_LOADING } from '../../util
 import { humanizeGender } from '../../utils';
 import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
+import { ItemSubheading } from '../../ui/ItemSubheading';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
@@ -22,12 +23,23 @@ const OompaDetail = () => {
       {isError && <p>{`${LITERAL_DETAIL_ERROR_MESSAGE} ${first_name}`}</p>}
 
       {oompaDetail && (
-        <Container element='section' className='flex'>
-          <img src={oompaDetail.image} alt={first_name} title={first_name} width={500} />
+        <Container element='section' className='md:flex md:gap-6'>
+          <img
+            className='mb-4 md:mb-0 md:w-55vw'
+            src={oompaDetail.image}
+            alt={first_name}
+            title={first_name}
+          />
           <div>
-            <h3 className='text-1xl'>{first_name}</h3>
-            <h4>{humanizeGender(oompaDetail.gender)}</h4>
-            <h4>{oompaDetail.profession}</h4>
+            <div className='mb-2 md:mb-8'>
+              <h3 className='text-xl'>
+                <b>{first_name}</b>
+              </h3>
+              <ItemSubheading
+                subHeading={humanizeGender(oompaDetail.gender)}
+                paragraph={oompaDetail.profession}
+              />
+            </div>
             <p>{oompaDetail.description}</p>
           </div>
         </Container>

@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Gender, HumanizedGender } from './interfaces/oompaList';
+import { Gender } from './interfaces/oompaList';
 import { useOompaListActions } from './hooks';
 import { PATH_BASE } from '../../utils/constants';
+import { humanizeGender } from '../../utils';
+import { ItemSubheading } from '../../ui/ItemSubheading';
 
 export interface IOompaListItemProps {
   id: string;
@@ -11,14 +13,7 @@ export interface IOompaListItemProps {
   profession: string;
 }
 
-const OompaListItem = ({
-  id,
-  image,
-  first_name,
-
-  gender,
-  profession,
-}: IOompaListItemProps) => {
+const OompaListItem = ({ id, image, first_name, gender, profession }: IOompaListItemProps) => {
   const navigate = useNavigate();
 
   const { setOompaItemStamp } = useOompaListActions();
@@ -34,7 +29,7 @@ const OompaListItem = ({
   };
 
   return (
-    <li className='mb-8'>
+    <li className='mb-4 sm:mb-8'>
       <img
         src={image}
         alt={first_name}
@@ -50,10 +45,7 @@ const OompaListItem = ({
           <b>{first_name}</b>
         </h3>
       </Link>
-      <p>{gender && HumanizedGender[gender]}</p>
-      <p>
-        <i>{profession}</i>
-      </p>
+      <ItemSubheading subHeading={humanizeGender(gender)} paragraph={profession} />
     </li>
   );
 };

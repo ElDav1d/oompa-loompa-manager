@@ -8,13 +8,19 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: `${COLOR_PRIMARY}`,
+        secondary: `${COLOR_SECONDARY}`,
+      },
       height: {
         "27vh": "27vh",
         "35vh": "35vh",
       },
-      colors: {
-        primary: `${COLOR_PRIMARY}`,
-        secondary: `${COLOR_SECONDARY}`,
+      width: {
+        "55vw": "55vw",
+      },
+      zIndex: {
+        1: '1'
       }
     },
   },

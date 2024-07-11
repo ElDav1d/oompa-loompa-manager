@@ -65,7 +65,7 @@ const OompaList = () => {
       )}
 
       {(isLoading || isFetchingNextPage || hasNextPage) && (
-        <div ref={ref}>
+        <div ref={ref} className='flex align-middle'>
           <Loader loadingLabel={LITERAL_LIST_LOADING} />
         </div>
       )}

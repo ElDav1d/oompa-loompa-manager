@@ -6,6 +6,7 @@ import { humanizeGender } from '../../utils';
 import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
 import { ItemSubheading } from '../../ui/ItemSubheading';
+import interpreteMarkup from '../../utils/interpreteHtml';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
@@ -21,7 +22,6 @@ const OompaDetail = () => {
       )}
 
       {isError && <p>{`${LITERAL_DETAIL_ERROR_MESSAGE} ${first_name}`}</p>}
-
       {oompaDetail && (
         <Container element='section' className='md:flex md:gap-6'>
           <img
@@ -40,7 +40,7 @@ const OompaDetail = () => {
                 paragraph={oompaDetail.profession}
               />
             </div>
-            <p>{oompaDetail.description}</p>
+            <p dangerouslySetInnerHTML={interpreteMarkup(oompaDetail.description)}></p>
           </div>
         </Container>
       )}

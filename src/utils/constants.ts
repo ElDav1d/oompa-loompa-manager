@@ -16,16 +16,21 @@ const LITERAL_FILTER_LIST_EMPTY_RESULTS =
   "Sorry, none of our oompas' matches your search! Try typing again";
 const LITERAL_FILTER_LIST_LABEL = 'Filter by name or profession';
 const LITERAL_FILTER_LIST_PLACEHOLDER = 'Search';
+const LITERAL_FILTER_LIST_IMG_ALT = 'Search';
+const LITERAL_FILTER_LIST_IMG_TITLE = 'Search';
 
 const LITERAL_LIST_ERROR_MESSAGE = 'Ther was an error getting the Ooompa Loompa List';
 const LITERAL_LIST_HEADING = 'Find your Oompa Loompa';
 const LITERAL_LIST_LOADING = 'Loading Ooompa Loompa List';
 const LITERAL_LIST_SUBHEADING = 'There are more than 100';
 
-const LITERAL_NAVIGATION_MAIN_FAKE_HEADING = 'Link to home page';
+const LITERAL_NAVIGATION_MAIN_FAKE_HEADING = "Oompa Loompa's Crew";
 const LITERAL_NAVIGATION_MAIN_IMG_ALT = 'Link to home page';
 const LITERAL_NAVIGATION_MAIN_IMG_TITLE = 'Link to home page';
 const LITERAL_NAVIGATION_MAIN_LABEL = 'Link to home page';
+
+const RESOURCE_URL_FILTER_LIST_ICON =
+  'https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/ic_search.png';
 
 const RESOURCE_URL_NAVIGATION_MAIN_ICON =
   'https://s3.eu-central-1.amazonaws.com/napptilus/level-test/imgs/logo-umpa-loompa.png';
@@ -47,6 +52,8 @@ export {
   LITERAL_FILTER_LIST_EMPTY_RESULTS,
   LITERAL_FILTER_LIST_LABEL,
   LITERAL_FILTER_LIST_PLACEHOLDER,
+  LITERAL_FILTER_LIST_IMG_ALT,
+  LITERAL_FILTER_LIST_IMG_TITLE,
   LITERAL_LIST_ERROR_MESSAGE,
   LITERAL_LIST_HEADING,
   LITERAL_LIST_LOADING,
@@ -57,6 +64,7 @@ export {
   LITERAL_NAVIGATION_MAIN_LABEL,
   QUERY_KEY_DETAIL,
   QUERY_KEY_LIST,
+  RESOURCE_URL_FILTER_LIST_ICON,
   RESOURCE_URL_NAVIGATION_MAIN_ICON,
   STORED_STATE,
 };

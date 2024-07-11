@@ -1,1 +1,1 @@
-export { default as FilterList } from './FilterList';
+export { default as FilterInput } from './FilterInput';

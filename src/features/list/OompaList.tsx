@@ -50,7 +50,7 @@ const OompaList = () => {
       )}
 
       {filteredOompas?.length > 0 && (
-        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+        <ul aria-live='polite' className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
           {filteredOompas.map(({ id, image, first_name, gender, profession }) => (
             <OompaListItem
               key={id}

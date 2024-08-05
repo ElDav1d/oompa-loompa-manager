@@ -4,7 +4,7 @@ import { getOompaDetail } from '../services';
 import { QUERY_KEY_DETAIL } from '../../../utils/constants';
 import { useOompaDetailActions } from '../hooks';
 import { useOompaListActions } from '../../list/hooks';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { isDataExpired } from '../../../utils';
 
 const useOompaDetail = (oompaId: string | undefined) => {
@@ -26,21 +26,15 @@ const useOompaDetail = (oompaId: string | undefined) => {
     enabled: shouldFetch,
   });
 
-  const memoizedSetOompaDetail = useCallback(setOompaDetail, []);
-  const memoizedUpdateOompaItemStamp = useCallback(updateOompaItemStamp, []);
-
   useEffect(() => {
-    if (data && oompaId) {
-      memoizedSetOompaDetail({
-        ...data,
-      });
-
-      memoizedUpdateOompaItemStamp({
+    if (data && oompaId && shouldFetch) {
+      setOompaDetail(data);
+      updateOompaItemStamp({
         fetching_date: new Date().toISOString(),
         id: oompaId,
       });
     }
-  }, [data, oompaId, memoizedSetOompaDetail, memoizedUpdateOompaItemStamp]);
+  }, [data, oompaId, shouldFetch, setOompaDetail, updateOompaItemStamp]);
 
   if (!shouldFetch) {
     return {
@@ -56,4 +50,5 @@ const useOompaDetail = (oompaId: string | undefined) => {
     };
   }
 };
+
 export default useOompaDetail;

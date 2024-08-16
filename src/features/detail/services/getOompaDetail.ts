@@ -1,6 +1,7 @@
 import { URL_BASE } from '../../../utils/constants';
+import { OompaDetail } from '../interfaces/oompaDetail';
 
-const getOompaDetail = async (oompaId: string | undefined) => {
+const getOompaDetail = async (oompaId: string | undefined): Promise<OompaDetail | undefined> => {
   const url = `${URL_BASE}/${oompaId}`;
 
   try {
@@ -12,9 +13,11 @@ const getOompaDetail = async (oompaId: string | undefined) => {
 
     const res = await response.json();
 
-    return res;
+    const { gender, description, image, profession }: OompaDetail = res;
+
+    return { gender, description, image, profession };
   } catch (error) {
-    return error;
+    console.log('Error fetching oompa detail:', error);
   }
 };
 

@@ -11,11 +11,11 @@ import interpreteMarkup from '../../utils/interpreteHtml';
 const OompaDetail = () => {
   const { oompaId } = useParams();
   const { first_name } = useAppSelector((state) => state.oompaList.item_stamp);
-  const { isLoading, isError, oompaDetail } = useOompaDetail(oompaId);
+  const { isFetching, isError, oompaDetail } = useOompaDetail(oompaId);
 
   return (
     <>
-      {isLoading && (
+      {isFetching && (
         <div className='flex align-middle'>
           <Loader loadingLabel={`${LITERAL_DETAIL_LOADING} ${first_name}`} />
         </div>

@@ -1,6 +1,8 @@
-import { IOompaListItem } from '../../../features/list/interfaces/oompaList';
+import { Gender } from '../../list/interfaces/oompaList';
 
-export type IOompaDetail = Omit<IOompaListItem, 'id' | 'first_name'> & {
+export type OompaDetail = {
+  gender: Gender;
   description: string;
-  quota: string;
+  image: string;
+  profession: string;
 };

@@ -14,7 +14,7 @@ const getOompaDetail = async (oompaId: string | undefined) => {
 
     return res;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

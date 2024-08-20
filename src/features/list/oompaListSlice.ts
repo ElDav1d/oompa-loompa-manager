@@ -1,17 +1,23 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {
-  IItemStamp,
-  IOompaList,
-  IOompaListStamp,
-  IOompaListWithItemStamp,
-} from './interfaces/oompaList';
+import { IItemStamp, IOompaListWithItemStamp } from './interfaces/oompaList';
+import { STORED_STATE_LIST } from '../../utils/constants';
 
-const initialState: IOompaListWithItemStamp = {
+const DEFAULT_STATE: IOompaListWithItemStamp = {
   current_page: 0,
   fetching_date: '',
   oompas: [],
   item_stamps: [],
 };
+
+const initialState = (() => {
+  const persistedState = localStorage.getItem(STORED_STATE_LIST);
+
+  if (persistedState && JSON.parse(persistedState).oompas?.length) {
+    return JSON.parse(persistedState);
+  } else {
+    return DEFAULT_STATE;
+  }
+})();
 
 export const oompaListSlice = createSlice({
   name: 'oompaList',

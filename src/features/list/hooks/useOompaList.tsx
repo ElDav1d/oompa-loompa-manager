@@ -9,19 +9,16 @@ import { isDataExpired } from '../../../utils';
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
   const persistedState = localStorage.getItem(STORED_STATE_LIST);
-  const { oompaList: persistedOompaList } = persistedState
-    ? JSON.parse(persistedState)
-    : { oompaList: null };
+  const persistedList = persistedState && JSON.parse(persistedState);
 
-  const shouldFetch =
-    persistedOompaList && isDataExpired(persistedOompaList.fetching_date, CACHE_TIME);
+  const shouldFetch = persistedList && isDataExpired(persistedList.fetching_date, CACHE_TIME);
 
-  const getCurrentPageParam = (persistedOompaList: IOompaList, shouldFetch: boolean) => {
-    if (persistedOompaList) {
+  const getCurrentPageParam = (list: IOompaList, shouldFetch: boolean) => {
+    if (list) {
       if (shouldFetch) {
         return undefined;
       } else {
-        return persistedOompaList.current_page;
+        return list.current_page;
       }
     } else {
       return undefined;
@@ -33,7 +30,7 @@ const useOompaList = () => {
       queryKey: [QUERY_KEY_LIST],
       queryFn: ({ pageParam }: { pageParam: number | undefined }) => getOompaList({ pageParam }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      initialPageParam: getCurrentPageParam(persistedOompaList, shouldFetch),
+      initialPageParam: getCurrentPageParam(persistedList, shouldFetch),
       refetchOnWindowFocus: false,
       staleTime: shouldFetch ? 0 : Infinity,
     });

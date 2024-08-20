@@ -1,10 +1,5 @@
 import { useAppDispatch } from '../../../hooks';
-import {
-  IItemStampUpdate,
-  INewItemStamp,
-  IOompaList,
-  IOompaListStamp,
-} from '../interfaces/oompaList';
+import { IItemStamp, IOompaList, IOompaListStamp } from '../interfaces/oompaList';
 import {
   setNewOompaItemStamp,
   setNewOompaList,
@@ -23,11 +18,11 @@ const useOompaListActions = () => {
     dispatch(setNewOompaListStamp(itemStamp));
   };
 
-  const setOompaItemStamp = (itemStamp: INewItemStamp) => {
+  const setOompaItemStamp = (itemStamp: IItemStamp) => {
     dispatch(setNewOompaItemStamp(itemStamp));
   };
 
-  const updateOompaItemStamp = (itemStampUpdate: IItemStampUpdate) => {
+  const updateOompaItemStamp = (itemStampUpdate: IItemStamp) => {
     dispatch(updateNewOompaItemStamp(itemStampUpdate));
   };
 

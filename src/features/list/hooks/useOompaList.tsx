@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getOompaList } from '../services';
-import { CACHE_TIME, QUERY_KEY_LIST, STORED_STATE } from '../../../utils/constants';
+import { CACHE_TIME, QUERY_KEY_LIST, STORED_STATE_LIST } from '../../../utils/constants';
 import useOompaListActions from './useOompaListActions';
 import { useCallback, useEffect } from 'react';
 import { IOompaList } from '../interfaces/oompaList';
@@ -8,7 +8,7 @@ import { isDataExpired } from '../../../utils';
 
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
-  const persistedState = localStorage.getItem(STORED_STATE);
+  const persistedState = localStorage.getItem(STORED_STATE_LIST);
   const { oompaList: persistedOompaList } = persistedState
     ? JSON.parse(persistedState)
     : { oompaList: null };

@@ -71,7 +71,6 @@ const useOompaList = () => {
     return {
       isLoading,
       isError,
-      fetchedOompas,
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
@@ -80,7 +79,6 @@ const useOompaList = () => {
     return {
       isLoading,
       isError,
-      fetchedOompas,
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,

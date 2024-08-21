@@ -1,20 +1,20 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getOompaList } from '../services';
-import { CACHE_TIME, QUERY_KEY_LIST, STORED_STATE_LIST } from '../../../utils/constants';
+import { CACHE_TIME, QUERY_KEY_LIST } from '../../../utils/constants';
 import useOompaListActions from './useOompaListActions';
 import { useEffect } from 'react';
-import { IOompaList } from '../interfaces/oompaList';
+import { IOompaListItem, IOompaListWithStamp } from '../interfaces/oompaList';
 import { isDataExpired } from '../../../utils';
+import { useAppSelector } from '../../../hooks';
 
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
-  const persistedState = localStorage.getItem(STORED_STATE_LIST);
-  const persistedList = persistedState && JSON.parse(persistedState);
+  const oompaListState = useAppSelector((state) => state.oompaList);
 
-  const shouldFetch = isDataExpired(persistedList.fetching_date, CACHE_TIME);
+  const shouldFetch = isDataExpired(oompaListState.fetching_date, CACHE_TIME);
 
-  const getCurrentPageParam = (list: IOompaList, shouldFetch: boolean) => {
-    if (list) {
+  const getCurrentPageParam = (list: IOompaListWithStamp, shouldFetch: boolean) => {
+    if (list?.fetching_date) {
       if (shouldFetch) {
         return undefined;
       } else {
@@ -30,7 +30,7 @@ const useOompaList = () => {
       queryKey: [QUERY_KEY_LIST],
       queryFn: ({ pageParam }: { pageParam: number | undefined }) => getOompaList({ pageParam }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      initialPageParam: getCurrentPageParam(persistedList, shouldFetch),
+      initialPageParam: getCurrentPageParam(oompaListState, shouldFetch),
       refetchOnWindowFocus: false,
       staleTime: shouldFetch ? 0 : Infinity,
     });

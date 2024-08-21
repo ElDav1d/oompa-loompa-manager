@@ -12,6 +12,7 @@ import {
 import { IOompaListItem } from './interfaces/oompaList';
 import { useFilterList } from '../filterList/hooks';
 import { Container } from '../../ui/Container';
+import styles from './OompaList.module.css';
 
 const OompaList = () => {
   const filterString = useAppSelector((state) => state.filterList.filterString);
@@ -50,7 +51,7 @@ const OompaList = () => {
       )}
 
       {filteredOompas?.length > 0 && (
-        <ul aria-live='polite' className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+        <ul aria-live='polite' className={styles.list}>
           {filteredOompas.map(({ id, image, first_name, gender, profession }) => (
             <OompaListItem
               key={id}
@@ -65,7 +66,7 @@ const OompaList = () => {
       )}
 
       {(isLoading || isFetchingNextPage || hasNextPage) && (
-        <div ref={ref} className='flex align-middle'>
+        <div ref={ref} className={styles.loader}>
           <Loader loadingLabel={LITERAL_LIST_LOADING} />
         </div>
       )}

@@ -7,6 +7,7 @@ import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
 import { ItemSubheading } from '../../ui/ItemSubheading';
 import interpreteMarkup from '../../utils/interpreteHtml';
+import styles from './OompaDetail.module.css';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
@@ -16,23 +17,23 @@ const OompaDetail = () => {
   return (
     <>
       {isLoading && (
-        <div className='flex align-middle'>
+        <div className={styles.loader}>
           <Loader loadingLabel={`${LITERAL_DETAIL_LOADING} ${first_name}`} />
         </div>
       )}
 
       {isError && <p>{`${LITERAL_DETAIL_ERROR_MESSAGE} ${first_name}`}</p>}
       {oompaDetail && (
-        <Container element='section' className='md:flex md:gap-6'>
+        <Container element='section' className={styles.container}>
           <img
-            className='mb-4 md:mb-0 md:w-55vw'
+            className={styles.image}
             src={oompaDetail.image}
             alt={first_name}
             title={first_name}
           />
           <div>
-            <div className='mb-2 md:mb-8'>
-              <h3 className='text-xl'>
+            <div className={styles.aside}>
+              <h3 className={styles.heading}>
                 <b>{first_name}</b>
               </h3>
               <ItemSubheading

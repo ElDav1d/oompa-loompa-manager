@@ -1,0 +1,33 @@
+.loader {
+    display: flex;
+    vertical-align: middle;
+}
+
+.image {
+    margin-bottom: 1rem;
+}
+
+.aside {
+    margin-bottom: .5rem;
+}
+
+.heading {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    .image {
+        margin-bottom: 0;
+        width: 55vw;
+    }
+    
+    .aside {
+        margin-bottom: 1.5rem;
+    }
+}

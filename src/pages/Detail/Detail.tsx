@@ -1,11 +1,12 @@
 import { OompaDetail } from '../../features/detail';
 import { NavigationMain } from '../../features/navigation';
 import { Header } from '../../ui/Header';
+import styles from './Detail.module.css';
 
 const Detail = () => {
   return (
     <>
-      <Header className='mb-8 md:mb-24'>
+      <Header className={styles.header}>
         <NavigationMain />
       </Header>
       <main>

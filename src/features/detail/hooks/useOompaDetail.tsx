@@ -1,18 +1,20 @@
 import { getOompaDetail } from '../services';
 import { useEffect, useState } from 'react';
-import { OompaDetail } from '../interfaces/oompaDetail';
+import useOompaDetailActions from './useOompaDetailActions';
 
 const useOompaDetail = (oompaId: string | undefined) => {
   const [isFetching, setIsFetching] = useState(true);
   const [isError, setIsError] = useState<unknown>();
-  const [oompaDetail, setOompaDetail] = useState<OompaDetail>();
+  const { setOompaDetail } = useOompaDetailActions();
 
   useEffect(() => {
     const fetchOompa = async () => {
       if (oompaId) {
         try {
           const data = await getOompaDetail(oompaId);
-          setOompaDetail(data);
+          if (data) {
+            setOompaDetail(data);
+          }
         } catch (error) {
           setIsError(error);
         } finally {
@@ -27,7 +29,6 @@ const useOompaDetail = (oompaId: string | undefined) => {
   return {
     isError,
     isFetching,
-    oompaDetail,
   };
 };
 

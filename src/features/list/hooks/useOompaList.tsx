@@ -3,7 +3,7 @@ import { getOompaList } from '../services';
 import { CACHE_TIME, QUERY_KEY_LIST } from '../../../utils/constants';
 import useOompaListActions from './useOompaListActions';
 import { useEffect } from 'react';
-import { IOompaListItem, IOompaListWithStamp } from '../interfaces/oompaList';
+import { IOompaListWithStamp } from '../interfaces/oompaList';
 import { isDataExpired } from '../../../utils';
 import { useAppSelector } from '../../../hooks';
 

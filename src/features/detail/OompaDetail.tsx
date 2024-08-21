@@ -7,20 +7,23 @@ import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
 import { ItemSubheading } from '../../ui/ItemSubheading';
 import interpreteMarkup from '../../utils/interpreteHtml';
+import { IItemStamp } from '../list/interfaces/oompaList';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
   const item_stamps = useAppSelector((state) => state.oompaList.item_stamps);
-  const { isFetching, isError, oompaDetail } = useOompaDetail(oompaId);
+  const { isFetching, isError } = useOompaDetail(oompaId);
+
+  const oompaDetail = useAppSelector((state) => state.oompaDetail);
 
   const firstName = () => {
-    const currentItem = item_stamps.find((item) => item.id === oompaId);
+    const currentItem = item_stamps.find((item: IItemStamp) => item.id === oompaId);
     return currentItem?.first_name;
   };
 
   return (
     <>
-      {isFetching && (
+      {isFetching && !oompaDetail && (
         <div className='flex align-middle'>
           <Loader loadingLabel={`${LITERAL_DETAIL_LOADING} ${firstName()}`} />
         </div>

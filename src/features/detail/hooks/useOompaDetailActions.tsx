@@ -1,11 +1,11 @@
 import { useAppDispatch } from '../../../hooks';
-import { IOompaDetail } from '../interfaces/oompaDetail';
+import { OompaDetail } from '../interfaces/oompaDetail';
 import { setNewOompaDetail } from '../oompaDetailSlice';
 
 const useOompaDetailActions = () => {
   const dispatch = useAppDispatch();
 
-  const setOompaDetail = (oompaDetail: IOompaDetail) => {
+  const setOompaDetail = (oompaDetail: OompaDetail) => {
     dispatch(setNewOompaDetail(oompaDetail));
   };
 

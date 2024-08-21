@@ -7,20 +7,14 @@ import {
   PATH_BASE,
   RESOURCE_URL_NAVIGATION_MAIN_ICON,
 } from '../../utils/constants';
+import styles from './NavigationMain.module.css';
 
 const NavigationMain = () => (
-  <div className='bg-secondary mb-4 md:mb-6'>
-    <Container
-      element='nav'
-      className='py-2 flex justify-between items-center gap-6 sm:justify-start'
-    >
-      <Link
-        to={PATH_BASE}
-        className='flex items-center gap-6'
-        aria-label={LITERAL_NAVIGATION_MAIN_LABEL}
-      >
+  <div className={styles.background}>
+    <Container element='nav' className={styles.container}>
+      <Link to={PATH_BASE} className={styles.link} aria-label={LITERAL_NAVIGATION_MAIN_LABEL}>
         <img
-          className='w-6'
+          className={styles.icon}
           src={RESOURCE_URL_NAVIGATION_MAIN_ICON}
           title={LITERAL_NAVIGATION_MAIN_IMG_TITLE}
           alt={LITERAL_NAVIGATION_MAIN_LABEL}

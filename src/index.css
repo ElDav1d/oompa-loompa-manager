@@ -10,4 +10,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-secondary: #D8D8D8;
 }

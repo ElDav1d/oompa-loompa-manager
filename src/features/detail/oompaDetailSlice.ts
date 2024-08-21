@@ -1,11 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { OompaDetail } from './interfaces/oompaDetail';
+import { STORED_STATE_DETAIL } from '../../utils/constants';
 
-const initialState: OompaDetail = {
+const DEFAULT_STATE: OompaDetail = {
   gender: '',
   image: '',
   profession: '',
   description: '',
+};
+
+const initialState = () => {
+  const persistedState = localStorage.getItem(STORED_STATE_DETAIL);
+
+  if (persistedState) {
+    return JSON.parse(persistedState);
+  } else {
+    return DEFAULT_STATE;
+  }
 };
 
 export const oompaDetailSlice = createSlice({

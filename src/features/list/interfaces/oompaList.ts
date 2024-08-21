@@ -35,6 +35,11 @@ export interface IItemStamp {
   fetching_date: string;
 }
 
+export interface IItemStampUpdate {
+  id: string;
+  fetching_date: string;
+}
+
 export interface IOompaListWithItemStamp extends IOompaListWithStamp {
   item_stamps: IItemStamp[];
 }

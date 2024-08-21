@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IItemStamp, IOompaListWithItemStamp } from './interfaces/oompaList';
+import { IItemStamp, IItemStampUpdate, IOompaListWithItemStamp } from './interfaces/oompaList';
 import { STORED_STATE_LIST } from '../../utils/constants';
 
 const DEFAULT_STATE: IOompaListWithItemStamp = {
@@ -38,9 +38,10 @@ export const oompaListSlice = createSlice({
         id: action.payload.id,
         fetching_date: '',
       };
+
       state.item_stamps.push(newStamp);
     },
-    updateNewOompaItemStamp(state, action: PayloadAction<IItemStamp>) {
+    updateNewOompaItemStamp(state, action: PayloadAction<IItemStampUpdate>) {
       // find item
       const items = [...state.item_stamps];
       const itemIndex = items.findIndex((item) => item.id === action.payload.id);

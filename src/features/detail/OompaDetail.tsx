@@ -12,7 +12,7 @@ import { IItemStamp } from '../list/interfaces/oompaList';
 const OompaDetail = () => {
   const { oompaId } = useParams();
   const item_stamps = useAppSelector((state) => state.oompaList.item_stamps);
-  const { isFetching, isError } = useOompaDetail(oompaId);
+  const { isLoading, isError } = useOompaDetail(oompaId);
 
   const oompaDetail = useAppSelector((state) => state.oompaDetail);
 
@@ -23,7 +23,7 @@ const OompaDetail = () => {
 
   return (
     <>
-      {isFetching && !oompaDetail && (
+      {isLoading && !oompaDetail && (
         <div className='flex align-middle'>
           <Loader loadingLabel={`${LITERAL_DETAIL_LOADING} ${firstName()}`} />
         </div>

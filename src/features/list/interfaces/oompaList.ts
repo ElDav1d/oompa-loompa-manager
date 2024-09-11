@@ -38,6 +38,10 @@ export interface IItemStamp {
 export interface IItemStampUpdate {
   id: string;
   fetching_date: string;
+  gender: Gender;
+  description: string;
+  image: string;
+  profession: string;
 }
 
 export interface IOompaListWithItemStamp extends IOompaListWithStamp {

@@ -53,9 +53,14 @@ export const oompaListSlice = createSlice({
       // find item
       const items = [...state.item_stamps];
       const itemIndex = items.findIndex((item) => item.id === action.payload.id);
+      const currentItem = items[itemIndex];
 
-      // uopdate item
-      items[itemIndex].fetching_date = action.payload.fetching_date;
+      // update item
+      currentItem.fetching_date = action.payload.fetching_date;
+      currentItem.gender = action.payload.gender;
+      currentItem.description = action.payload.description;
+      currentItem.image = action.payload.image;
+      currentItem.profession = action.payload.profession;
 
       // update state
       state.item_stamps = items;

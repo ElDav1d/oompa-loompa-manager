@@ -19,7 +19,14 @@ const useOompaDetail = (oompaId: string | undefined) => {
             setOompaDetail(data);
 
             const fetching_date = new Date().toISOString();
-            updateOompaItemStamp({ fetching_date, id: oompaId });
+            updateOompaItemStamp({
+              fetching_date,
+              id: oompaId,
+              gender: data.gender,
+              description: data.description,
+              image: data.image,
+              profession: data.profession,
+            });
           }
         } catch (error) {
           setIsError(error);

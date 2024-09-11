@@ -33,13 +33,21 @@ export const oompaListSlice = createSlice({
       state.fetching_date = action.payload.fetching_date;
     },
     setNewOompaItemStamp(state, action: PayloadAction<IItemStamp>) {
-      const newStamp = {
-        first_name: action.payload.first_name,
-        id: action.payload.id,
-        fetching_date: '',
-      };
+      const hasItemStamp = state.item_stamps.some(
+        (stamp: IItemStamp) => stamp.id === action.payload.id,
+      );
 
-      state.item_stamps.push(newStamp);
+      if (hasItemStamp) {
+        return;
+      } else {
+        const newStamp = {
+          first_name: action.payload.first_name,
+          id: action.payload.id,
+          fetching_date: '',
+        };
+
+        state.item_stamps.push(newStamp);
+      }
     },
     updateNewOompaItemStamp(state, action: PayloadAction<IItemStampUpdate>) {
       // find item

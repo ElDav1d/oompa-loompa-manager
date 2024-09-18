@@ -6,7 +6,7 @@ export interface IOompaListPage {
 
 export interface IOompaList {
   current_page: number | undefined;
-  oompas: IOompaListItem[];
+  items: IOompaListItem[];
 }
 
 export interface IOompaListStamp {
@@ -15,33 +15,27 @@ export interface IOompaListStamp {
 
 export interface IOompaListWithStamp extends IOompaList, IOompaListStamp {}
 
-export interface IOompaListItem {
+export interface IItemStamp {
   first_name: string;
-  last_name: string;
-  favorite: IFavorite;
-  gender: Gender;
-  image: string;
-  profession: string;
-  email: string;
-  age: number;
-  country: Country;
-  height: number;
-  id: number;
-}
-
-export interface INewItemStamp {
-  first_name: string;
-}
-
-export interface IItemStampUpdate {
-  fetching_date: string;
   id: string;
 }
 
-export interface IUpdatedItemStamp extends INewItemStamp, IItemStampUpdate {}
+export interface IOompaListItem extends IItemStamp {
+  gender: Gender;
+  profession: string;
+  image: string;
+}
 
-export interface IOompaListWithItemStamp extends IOompaListWithStamp {
-  item_stamp: IUpdatedItemStamp;
+export interface IItemDetail extends IItemStamp {
+  fetching_date: string;
+  gender: Gender;
+  description: string;
+  image: string;
+  profession: string;
+}
+
+export interface IOompaListWithDetails extends IOompaListWithStamp {
+  details: IItemStamp[];
 }
 
 export type Country = 'Loompalandia' | '';

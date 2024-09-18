@@ -22,6 +22,7 @@ const OompaListItem = ({ id, image, first_name, gender, profession }: IOompaList
     e.preventDefault();
 
     setOompaItemStamp({
+      id,
       first_name,
     });
 

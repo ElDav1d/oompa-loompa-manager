@@ -1,27 +1,24 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getOompaList } from '../services';
-import { CACHE_TIME, QUERY_KEY_LIST, STORED_STATE } from '../../../utils/constants';
+import { CACHE_TIME, QUERY_KEY_LIST } from '../../../utils/constants';
 import useOompaListActions from './useOompaListActions';
-import { useCallback, useEffect } from 'react';
-import { IOompaList } from '../interfaces/oompaList';
+import { useEffect } from 'react';
+import { IOompaListItem, IOompaListWithStamp } from '../interfaces/oompaList';
 import { isDataExpired } from '../../../utils';
+import { useAppSelector } from '../../../hooks';
 
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
-  const persistedState = localStorage.getItem(STORED_STATE);
-  const { oompaList: persistedOompaList } = persistedState
-    ? JSON.parse(persistedState)
-    : { oompaList: null };
+  const oompaListState = useAppSelector((state) => state.oompaList);
 
-  const shouldFetch =
-    persistedOompaList && isDataExpired(persistedOompaList.fetching_date, CACHE_TIME);
+  const shouldFetch = isDataExpired(oompaListState.fetching_date, CACHE_TIME);
 
-  const getCurrentPageParam = (persistedOompaList: IOompaList, shouldFetch: boolean) => {
-    if (persistedOompaList) {
+  const getCurrentPageParam = (list: IOompaListWithStamp, shouldFetch: boolean) => {
+    if (list?.fetching_date) {
       if (shouldFetch) {
         return undefined;
       } else {
-        return persistedOompaList.current_page;
+        return list.current_page;
       }
     } else {
       return undefined;
@@ -33,37 +30,30 @@ const useOompaList = () => {
       queryKey: [QUERY_KEY_LIST],
       queryFn: ({ pageParam }: { pageParam: number | undefined }) => getOompaList({ pageParam }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      initialPageParam: getCurrentPageParam(persistedOompaList, shouldFetch),
+      initialPageParam: getCurrentPageParam(oompaListState, shouldFetch),
       refetchOnWindowFocus: false,
       staleTime: shouldFetch ? 0 : Infinity,
     });
 
   const newFetchingDate = new Date().toISOString();
 
-  const fetchedOompas = data?.pages?.flatMap((page) => page?.data.results) || [];
-
-  const memoizedSetOompaList = useCallback(setOompaList, []);
-  const memoizedSetOompaListStamp = useCallback(setOompaListStamp, []);
+  const fetchedOompas: IOompaListItem[] = data?.pages?.flatMap((page) => page?.data.results) || [];
 
   useEffect(() => {
     if (shouldFetch) {
-      if (data) {
-        memoizedSetOompaListStamp({
-          fetching_date: newFetchingDate,
-        });
+      setOompaListStamp({
+        fetching_date: newFetchingDate,
+      });
 
-        memoizedSetOompaList({
-          oompas: fetchedOompas,
-          current_page: data?.pages?.length,
-        });
-      }
+      setOompaList({
+        items: fetchedOompas,
+        current_page: data?.pages?.length,
+      });
     } else {
-      if (data) {
-        memoizedSetOompaList({
-          oompas: fetchedOompas,
-          current_page: data.pages.length,
-        });
-      }
+      setOompaList({
+        items: fetchedOompas,
+        current_page: data?.pages?.length,
+      });
     }
   }, [data, shouldFetch]);
 
@@ -71,7 +61,6 @@ const useOompaList = () => {
     return {
       isLoading,
       isError,
-      fetchedOompas,
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
@@ -80,7 +69,6 @@ const useOompaList = () => {
     return {
       isLoading,
       isError,
-      fetchedOompas,
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,

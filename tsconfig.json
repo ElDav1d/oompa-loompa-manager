@@ -24,9 +24,9 @@
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "esModuleInterop": true,    
-    "baseUrl": "./", 
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"] 
+      "@/*": ["src/*"]
     }
   }
 }

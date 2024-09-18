@@ -1,54 +1,56 @@
-import { CACHE_TIME, STORED_STATE } from '../../../utils/constants';
-import { useQuery } from '@tanstack/react-query';
 import { getOompaDetail } from '../services';
-import { QUERY_KEY_DETAIL } from '../../../utils/constants';
-import { useOompaDetailActions } from '../hooks';
+import { useEffect, useState } from 'react';
 import { useOompaListActions } from '../../list/hooks';
-import { useEffect } from 'react';
+import { useAppSelector } from '../../../hooks';
 import { isDataExpired } from '../../../utils';
+import { CACHE_TIME } from '../../../utils/constants';
+import { IItemStamp } from '../../list/interfaces/oompaList';
 
 const useOompaDetail = (oompaId: string | undefined) => {
-  const { setOompaDetail } = useOompaDetailActions();
-  const { updateOompaItemStamp } = useOompaListActions();
-  const persistedState = localStorage.getItem(STORED_STATE);
-
-  const {
-    oompaDetail: persistedOompaDetail,
-    oompaList: { item_stamp },
-  } = persistedState && JSON.parse(persistedState);
-
-  const shouldFetch =
-    item_stamp.id !== oompaId || isDataExpired(item_stamp.fetching_date, CACHE_TIME);
-
-  const { isLoading, isError, data } = useQuery({
-    queryKey: [QUERY_KEY_DETAIL, oompaId],
-    queryFn: () => getOompaDetail(oompaId),
-    enabled: shouldFetch,
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState<unknown>();
+  const [isError, setIsError] = useState<unknown>();
+  const { setOompaDetail } = useOompaListActions();
+  const items = useAppSelector((state) => state.oompaList.items);
 
   useEffect(() => {
-    if (data && oompaId && shouldFetch) {
-      setOompaDetail(data);
-      updateOompaItemStamp({
-        fetching_date: new Date().toISOString(),
-        id: oompaId,
-      });
-    }
-  }, [data, oompaId, shouldFetch, setOompaDetail, updateOompaItemStamp]);
+    if (oompaId) {
+      const oompaItem = items.find((item: IItemStamp) => item.id === oompaId);
 
-  if (!shouldFetch) {
-    return {
-      isLoading: false,
-      isError: false,
-      oompaDetail: persistedOompaDetail,
-    };
-  } else {
-    return {
-      isLoading,
-      isError,
-      oompaDetail: data,
-    };
-  }
+      if (isDataExpired(oompaItem.fetching_date, CACHE_TIME)) {
+        const fetchOompa = async () => {
+          try {
+            const data = await getOompaDetail(oompaId);
+            if (data) {
+              setOompaDetail({
+                ...oompaItem,
+                fetching_date: new Date().toISOString(),
+                gender: data.gender,
+                description: data.description,
+                image: data.image,
+                profession: data.profession,
+              });
+            }
+          } catch (error) {
+            setIsError(error);
+          } finally {
+            setIsFetching(false);
+            setIsLoading(false);
+          }
+        };
+        fetchOompa();
+      } else {
+        setIsFetching(false);
+        setIsLoading(false);
+      }
+    }
+  }, [oompaId]);
+
+  return {
+    isError,
+    isLoading,
+    isFetching,
+  };
 };
 
 export default useOompaDetail;

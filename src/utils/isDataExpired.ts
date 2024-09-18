@@ -1,5 +1,5 @@
 const isDataExpired = (lastFetch: string, cacheTime: number) => {
-  if (!lastFetch) {
+  if (lastFetch === '') {
     return true;
   }
 

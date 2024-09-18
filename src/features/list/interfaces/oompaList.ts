@@ -29,19 +29,21 @@ export interface IOompaListItem {
   id: number;
 }
 
-export interface INewItemStamp {
+export interface IItemStamp {
   first_name: string;
-}
-
-export interface IItemStampUpdate {
-  fetching_date: string;
   id: string;
 }
 
-export interface IUpdatedItemStamp extends INewItemStamp, IItemStampUpdate {}
+export interface IItemDetail extends IItemStamp {
+  fetching_date: string;
+  gender: Gender;
+  description: string;
+  image: string;
+  profession: string;
+}
 
-export interface IOompaListWithItemStamp extends IOompaListWithStamp {
-  item_stamp: IUpdatedItemStamp;
+export interface IOompaListWithItems extends IOompaListWithStamp {
+  items: IItemStamp[];
 }
 
 export type Country = 'Loompalandia' | '';

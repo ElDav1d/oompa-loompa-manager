@@ -7,11 +7,16 @@ import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
 import { ItemSubheading } from '../../ui/ItemSubheading';
 import interpreteMarkup from '../../utils/interpreteHtml';
+import { IItemDetail } from '../list/interfaces/oompaList';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
-  const { first_name } = useAppSelector((state) => state.oompaList.item_stamp);
-  const { isLoading, isError, oompaDetail } = useOompaDetail(oompaId);
+  const items = useAppSelector((state) => state.oompaList.items);
+  const { isLoading, isError } = useOompaDetail(oompaId);
+
+  const { first_name, image, gender, profession, description } = items.find(
+    (item: IItemDetail) => item.id === oompaId,
+  );
 
   return (
     <>
@@ -22,25 +27,18 @@ const OompaDetail = () => {
       )}
 
       {isError && <p>{`${LITERAL_DETAIL_ERROR_MESSAGE} ${first_name}`}</p>}
-      {oompaDetail && (
+
+      {!isLoading && (
         <Container element='section' className='md:flex md:gap-6'>
-          <img
-            className='mb-4 md:mb-0 md:w-55vw'
-            src={oompaDetail.image}
-            alt={first_name}
-            title={first_name}
-          />
+          <img className='mb-4 md:mb-0 md:w-55vw' src={image} alt={first_name} title={first_name} />
           <div>
             <div className='mb-2 md:mb-8'>
               <h3 className='text-xl'>
                 <b>{first_name}</b>
               </h3>
-              <ItemSubheading
-                subHeading={humanizeGender(oompaDetail.gender)}
-                paragraph={oompaDetail.profession}
-              />
+              <ItemSubheading subHeading={humanizeGender(gender)} paragraph={profession} />
             </div>
-            <p dangerouslySetInnerHTML={interpreteMarkup(oompaDetail.description)}></p>
+            <p dangerouslySetInnerHTML={interpreteMarkup(description)}></p>
           </div>
         </Container>
       )}

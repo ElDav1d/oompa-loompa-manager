@@ -38,7 +38,8 @@ const RESOURCE_URL_NAVIGATION_MAIN_ICON =
 const QUERY_KEY_DETAIL = 'oompaDetail';
 const QUERY_KEY_LIST = 'oompaList';
 
-const STORED_STATE = '__oompas__state__';
+const STORED_STATE_LIST = '__oompaList__state__';
+const STORED_STATE_DETAIL = '__oompaDetail__state__';
 
 export {
   URL_BASE,
@@ -66,5 +67,6 @@ export {
   QUERY_KEY_LIST,
   RESOURCE_URL_FILTER_LIST_ICON,
   RESOURCE_URL_NAVIGATION_MAIN_ICON,
-  STORED_STATE,
+  STORED_STATE_LIST,
+  STORED_STATE_DETAIL,
 };

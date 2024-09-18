@@ -15,7 +15,7 @@ const OompaDetail = () => {
   const { isLoading, isError } = useOompaDetail(oompaId);
 
   const { first_name, image, gender, profession, description } = item_stamps.find(
-    (item: IItemStamp) => item.id === oompaId,
+    (stamp: IItemStamp) => stamp.id === oompaId,
   );
 
   return (

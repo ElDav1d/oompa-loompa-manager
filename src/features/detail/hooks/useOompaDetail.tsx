@@ -2,6 +2,9 @@ import { getOompaDetail } from '../services';
 import { useEffect, useState } from 'react';
 import useOompaDetailActions from './useOompaDetailActions';
 import { useOompaListActions } from '../../list/hooks';
+import { useAppSelector } from '../../../hooks';
+import { isDataExpired } from '../../../utils';
+import { CACHE_TIME } from '../../../utils/constants';
 
 const useOompaDetail = (oompaId: string | undefined) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,35 +12,42 @@ const useOompaDetail = (oompaId: string | undefined) => {
   const [isError, setIsError] = useState<unknown>();
   const { setOompaDetail } = useOompaDetailActions();
   const { updateOompaItemStamp } = useOompaListActions();
+  const item_stamps = useAppSelector((state) => state.oompaList.item_stamps);
 
   useEffect(() => {
-    const fetchOompa = async () => {
-      if (oompaId) {
-        try {
-          const data = await getOompaDetail(oompaId);
-          if (data) {
-            setOompaDetail(data);
+    if (oompaId) {
+      const oompaItem = item_stamps.find((stamp: any) => stamp.id === oompaId);
 
-            const fetching_date = new Date().toISOString();
-            updateOompaItemStamp({
-              fetching_date,
-              id: oompaId,
-              gender: data.gender,
-              description: data.description,
-              image: data.image,
-              profession: data.profession,
-            });
+      if (isDataExpired(oompaItem.fetching_date, CACHE_TIME)) {
+        const fetchOompa = async () => {
+          try {
+            const data = await getOompaDetail(oompaId);
+            if (data) {
+              setOompaDetail(data);
+
+              const fetching_date = new Date().toISOString();
+              updateOompaItemStamp({
+                fetching_date,
+                id: oompaId,
+                gender: data.gender,
+                description: data.description,
+                image: data.image,
+                profession: data.profession,
+              });
+            }
+          } catch (error) {
+            setIsError(error);
+          } finally {
+            setIsFetching(false);
+            setIsLoading(false);
           }
-        } catch (error) {
-          setIsError(error);
-        } finally {
-          setIsFetching(false);
-          setIsLoading(false);
-        }
+        };
+        fetchOompa();
+      } else {
+        setIsFetching(false);
+        setIsLoading(false);
       }
-    };
-
-    fetchOompa();
+    }
   }, [oompaId]);
 
   return {

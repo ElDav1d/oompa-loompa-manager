@@ -7,15 +7,15 @@ import { Container } from '../../ui/Container';
 import { Loader } from '../../ui/Loader';
 import { ItemSubheading } from '../../ui/ItemSubheading';
 import interpreteMarkup from '../../utils/interpreteHtml';
-import { IItemStamp } from '../list/interfaces/oompaList';
+import { IItemDetail } from '../list/interfaces/oompaList';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
-  const item_stamps = useAppSelector((state) => state.oompaList.item_stamps);
+  const items = useAppSelector((state) => state.oompaList.items);
   const { isLoading, isError } = useOompaDetail(oompaId);
 
-  const { first_name, image, gender, profession, description } = item_stamps.find(
-    (stamp: IItemStamp) => stamp.id === oompaId,
+  const { first_name, image, gender, profession, description } = items.find(
+    (item: IItemDetail) => item.id === oompaId,
   );
 
   return (

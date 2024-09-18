@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IItemStamp, IItemStampUpdate, IOompaListWithItemStamp } from './interfaces/oompaList';
+import { IItemStamp, IItemDetail, IOompaListWithItems } from './interfaces/oompaList';
 import { STORED_STATE_LIST } from '../../utils/constants';
 
-const DEFAULT_STATE: IOompaListWithItemStamp = {
+const DEFAULT_STATE: IOompaListWithItems = {
   current_page: 0,
   fetching_date: '',
   oompas: [],
-  item_stamps: [],
+  items: [],
 };
 
 const initialState = (() => {
@@ -33,9 +33,7 @@ export const oompaListSlice = createSlice({
       state.fetching_date = action.payload.fetching_date;
     },
     setNewOompaItemStamp(state, action: PayloadAction<IItemStamp>) {
-      const hasItemStamp = state.item_stamps.some(
-        (stamp: IItemStamp) => stamp.id === action.payload.id,
-      );
+      const hasItemStamp = state.items.some((stamp: IItemStamp) => stamp.id === action.payload.id);
 
       if (hasItemStamp) {
         return;
@@ -46,12 +44,12 @@ export const oompaListSlice = createSlice({
           fetching_date: '',
         };
 
-        state.item_stamps.push(newStamp);
+        state.items.push(newStamp);
       }
     },
-    updateNewOompaItemStamp(state, action: PayloadAction<IItemStampUpdate>) {
+    setNewOompaDetail(state, action: PayloadAction<IItemDetail>) {
       // find item
-      const items = [...state.item_stamps];
+      const items = [...state.items];
       const itemIndex = items.findIndex((item) => item.id === action.payload.id);
       const currentItem = items[itemIndex];
 
@@ -63,15 +61,11 @@ export const oompaListSlice = createSlice({
       currentItem.profession = action.payload.profession;
 
       // update state
-      state.item_stamps = items;
+      state.items = items;
     },
   },
 });
 
 export default oompaListSlice.reducer;
-export const {
-  setNewOompaList,
-  setNewOompaListStamp,
-  setNewOompaItemStamp,
-  updateNewOompaItemStamp,
-} = oompaListSlice.actions;
+export const { setNewOompaList, setNewOompaListStamp, setNewOompaItemStamp, setNewOompaDetail } =
+  oompaListSlice.actions;

@@ -1,6 +1,5 @@
 import { getOompaDetail } from '../services';
 import { useEffect, useState } from 'react';
-import useOompaDetailActions from './useOompaDetailActions';
 import { useOompaListActions } from '../../list/hooks';
 import { useAppSelector } from '../../../hooks';
 import { isDataExpired } from '../../../utils';
@@ -10,7 +9,6 @@ const useOompaDetail = (oompaId: string | undefined) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetching, setIsFetching] = useState<unknown>();
   const [isError, setIsError] = useState<unknown>();
-  const { setOompaDetail } = useOompaDetailActions();
   const { updateOompaItemStamp } = useOompaListActions();
   const item_stamps = useAppSelector((state) => state.oompaList.item_stamps);
 
@@ -23,8 +21,6 @@ const useOompaDetail = (oompaId: string | undefined) => {
           try {
             const data = await getOompaDetail(oompaId);
             if (data) {
-              setOompaDetail(data);
-
               const fetching_date = new Date().toISOString();
               updateOompaItemStamp({
                 fetching_date,

@@ -1,6 +1,6 @@
 import { Middleware } from '@reduxjs/toolkit';
-import { STORED_STATE_LIST, STORED_STATE_DETAIL } from '../utils/constants';
-import { setNewOompaDetail } from '../features/detail/oompaDetailSlice';
+import { STORED_STATE_LIST } from '../utils/constants';
+
 import {
   setNewOompaItemStamp,
   setNewOompaList,
@@ -16,10 +16,6 @@ const persistState: Middleware = (store) => (next) => (action: unknown) => {
     setNewOompaList.match(action)
   ) {
     localStorage.setItem(STORED_STATE_LIST, JSON.stringify(store.getState().oompaList));
-  }
-
-  if (setNewOompaDetail.match(action)) {
-    localStorage.setItem(STORED_STATE_DETAIL, JSON.stringify(store.getState().oompaDetail));
   }
 };
 

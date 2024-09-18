@@ -22,11 +22,9 @@ const useOompaDetail = (oompaId: string | undefined) => {
           try {
             const data = await getOompaDetail(oompaId);
             if (data) {
-              const fetching_date = new Date().toISOString();
-
               setOompaDetail({
                 ...oompaItem,
-                fetching_date,
+                fetching_date: new Date().toISOString(),
                 gender: data.gender,
                 description: data.description,
                 image: data.image,

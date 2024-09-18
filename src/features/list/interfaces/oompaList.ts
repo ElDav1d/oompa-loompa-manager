@@ -32,10 +32,10 @@ export interface IOompaListItem {
 export interface IItemStamp {
   first_name: string;
   id: string;
-  fetching_date: string;
 }
 
 export interface IItemDetail extends IItemStamp {
+  fetching_date: string;
   gender: Gender;
   description: string;
   image: string;

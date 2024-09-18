@@ -24,7 +24,6 @@ const OompaListItem = ({ id, image, first_name, gender, profession }: IOompaList
     setOompaItemStamp({
       id,
       first_name,
-      fetching_date: '',
     });
 
     navigate(`/${id}`);

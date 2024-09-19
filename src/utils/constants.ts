@@ -39,7 +39,7 @@ const QUERY_KEY_DETAIL = 'oompaDetail';
 const QUERY_KEY_LIST = 'oompaList';
 
 const STORED_STATE_LIST = '__oompaList__state__';
-const STORED_STATE_DETAIL = '__oompaDetail__state__';
+const STORED_STATE_LIST_NEW = '__oompaList__state__NEW__';
 
 export {
   URL_BASE,
@@ -68,5 +68,5 @@ export {
   RESOURCE_URL_FILTER_LIST_ICON,
   RESOURCE_URL_NAVIGATION_MAIN_ICON,
   STORED_STATE_LIST,
-  STORED_STATE_DETAIL,
+  STORED_STATE_LIST_NEW,
 };

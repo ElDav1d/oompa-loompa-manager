@@ -1,7 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 import { Loader } from '../../ui/Loader';
 import { useEffect } from 'react';
-import { useOompaList } from './hooks';
+import { useOompaList, useOompaListNEW } from './hooks';
 import { useAppSelector } from '../../hooks';
 import OompaListItem from './OompaListItem';
 import {
@@ -22,6 +22,8 @@ const OompaList = () => {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
+
+  useOompaListNEW(inView);
 
   const filteredOompas: IOompaListItem[] = useFilterList({
     items,

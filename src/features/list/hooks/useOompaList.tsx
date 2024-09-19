@@ -37,7 +37,18 @@ const useOompaList = () => {
 
   const newFetchingDate = new Date().toISOString();
 
-  const fetchedOompas: IOompaListItem[] = data?.pages?.flatMap((page) => page?.data.results) || [];
+  const fetchedOompas =
+    data?.pages?.flatMap((page) =>
+      page?.data.results.map(({ id, first_name, gender, profession, image }: IOompaListItem) => {
+        return {
+          id: id.toString(),
+          first_name,
+          gender,
+          profession,
+          image,
+        };
+      }),
+    ) || [];
 
   useEffect(() => {
     if (shouldFetch) {

@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IItemStamp, IItemDetail, IOompaListWithItems } from './interfaces/oompaList';
+import { IItemStamp, IItemDetail, IOompaListWithDetails, IOompaList } from './interfaces/oompaList';
 import { STORED_STATE_LIST } from '../../utils/constants';
 
-const DEFAULT_STATE: IOompaListWithItems = {
+const DEFAULT_STATE: IOompaListWithDetails = {
   current_page: 0,
   fetching_date: '',
-  oompas: [],
   items: [],
+  details: [],
 };
 
 const initialState = (() => {
@@ -23,17 +23,19 @@ export const oompaListSlice = createSlice({
   name: 'oompaList',
   initialState,
   reducers: {
-    setNewOompaList(state, action) {
+    setNewOompaList(state, action: PayloadAction<IOompaList>) {
       // as long as redux toolkit is being used, immer is being used
       // so state is being protected from mutations
-      state.oompas = action.payload.oompas;
+      state.items = action.payload.items;
       state.current_page = action.payload.current_page;
     },
     setNewOompaListStamp(state, action) {
       state.fetching_date = action.payload.fetching_date;
     },
     setNewOompaItemStamp(state, action: PayloadAction<IItemStamp>) {
-      const hasItemStamp = state.items.some((stamp: IItemStamp) => stamp.id === action.payload.id);
+      const hasItemStamp = state.details.some(
+        (detail_stamp: IItemStamp) => detail_stamp.id === action.payload.id,
+      );
 
       if (hasItemStamp) {
         return;
@@ -41,10 +43,9 @@ export const oompaListSlice = createSlice({
         const newStamp = {
           first_name: action.payload.first_name,
           id: action.payload.id,
-          fetching_date: '',
         };
 
-        state.items.push(newStamp);
+        state.details.push(newStamp);
       }
     },
     setNewOompaDetail(state, action: PayloadAction<IItemDetail>) {

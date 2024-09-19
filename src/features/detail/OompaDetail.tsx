@@ -11,11 +11,11 @@ import { IItemDetail } from '../list/interfaces/oompaList';
 
 const OompaDetail = () => {
   const { oompaId } = useParams();
-  const items = useAppSelector((state) => state.oompaList.items);
+  const details = useAppSelector((state) => state.oompaList.details);
   const { isLoading, isError } = useOompaDetail(oompaId);
 
-  const { first_name, image, gender, profession, description } = items.find(
-    (item: IItemDetail) => item.id === oompaId,
+  const { first_name, image, gender, profession, description } = details.find(
+    (detail: IItemDetail) => detail.id === oompaId,
   );
 
   return (

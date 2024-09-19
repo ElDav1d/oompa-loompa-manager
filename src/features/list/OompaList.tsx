@@ -15,7 +15,7 @@ import { Container } from '../../ui/Container';
 
 const OompaList = () => {
   const filterString = useAppSelector((state) => state.filterList.filterString);
-  const oompas = useAppSelector((state) => state.oompaList.oompas);
+  const items = useAppSelector((state) => state.oompaList.items);
 
   const { isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useOompaList();
 
@@ -24,9 +24,9 @@ const OompaList = () => {
   });
 
   const filteredOompas: IOompaListItem[] = useFilterList({
-    items: oompas,
+    items,
     filterString,
-    filterProperties: ['first_name', 'last_name', 'profession'],
+    filterProperties: ['first_name', 'profession'],
   });
 
   useEffect(() => {

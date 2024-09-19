@@ -3,9 +3,10 @@ import { getOompaList } from '../services';
 import { CACHE_TIME, QUERY_KEY_LIST } from '../../../utils/constants';
 import useOompaListActions from './useOompaListActions';
 import { useEffect } from 'react';
-import { IOompaListWithStamp } from '../interfaces/oompaList';
+import { IOompaListItem, IOompaListWithStamp } from '../interfaces/oompaList';
 import { isDataExpired } from '../../../utils';
 import { useAppSelector } from '../../../hooks';
+import { isValidOompaList } from '../../detail/hooks/utils';
 
 const useOompaList = () => {
   const { setOompaList, setOompaListStamp } = useOompaListActions();
@@ -37,7 +38,25 @@ const useOompaList = () => {
 
   const newFetchingDate = new Date().toISOString();
 
-  const fetchedOompas = data?.pages?.flatMap((page) => page?.data.results) || [];
+  const fetchedOompas =
+    data?.pages?.flatMap((page) =>
+      page?.data.results.map(({ id, first_name, gender, profession, image }: IOompaListItem) => {
+        return {
+          id: id.toString(),
+          first_name,
+          gender,
+          profession,
+          image,
+        };
+      }),
+    ) || [];
+
+  const current_page = data?.pages?.length;
+
+  const setValidOompaList = () => {
+    const payload = { items: fetchedOompas, current_page };
+    isValidOompaList(payload) && setOompaList(payload);
+  };
 
   useEffect(() => {
     if (shouldFetch) {
@@ -45,15 +64,9 @@ const useOompaList = () => {
         fetching_date: newFetchingDate,
       });
 
-      setOompaList({
-        oompas: fetchedOompas,
-        current_page: data?.pages?.length,
-      });
+      setValidOompaList();
     } else {
-      setOompaList({
-        oompas: fetchedOompas,
-        current_page: data?.pages?.length,
-      });
+      setValidOompaList();
     }
   }, [data, shouldFetch]);
 

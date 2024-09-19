@@ -11,11 +11,11 @@ const useOompaDetail = (oompaId: string | undefined) => {
   const [isFetching, setIsFetching] = useState<unknown>();
   const [isError, setIsError] = useState<unknown>();
   const { setOompaDetail } = useOompaListActions();
-  const items = useAppSelector((state) => state.oompaList.items);
+  const details = useAppSelector((state) => state.oompaList.details);
 
   useEffect(() => {
     if (oompaId) {
-      const oompaItem = items.find((item: IItemStamp) => item.id === oompaId);
+      const oompaItem = details.find((item: IItemStamp) => item.id === oompaId);
 
       if (isDataExpired(oompaItem.fetching_date, CACHE_TIME)) {
         const fetchOompa = async () => {

@@ -1,9 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IItemStamp, IItemDetail, IOompaListWithDetails, IOompaList } from './interfaces/oompaList';
+import {
+  IItemStamp,
+  IItemDetail,
+  IOompaListWithDetails,
+  IOompaListItem,
+} from './interfaces/oompaList';
 import { STORED_STATE_LIST_NEW } from '../../utils/constants';
 
 const DEFAULT_STATE: IOompaListWithDetails = {
-  current_page: 0,
+  current_page: 1,
   fetching_date: '',
   items: [],
   details: [],
@@ -23,11 +28,11 @@ export const oompaListSliceNEW = createSlice({
   name: 'oompaListNEW',
   initialState,
   reducers: {
-    setNewOompaListNEW(state, action: PayloadAction<IOompaList>) {
+    setNewOompaListNEW(state, action: PayloadAction<IOompaListItem[]>) {
       // as long as redux toolkit is being used, immer is being used
       // so state is being protected from mutations
-      state.items = action.payload.items;
-      state.current_page = action.payload.current_page;
+      state.items = [...state.items, ...action.payload];
+      state.current_page += 1;
     },
     setNewOompaListStampNEW(state, action) {
       state.fetching_date = action.payload.fetching_date;
